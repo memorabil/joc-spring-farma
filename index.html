@@ -1121,7 +1121,7 @@
 
       <p class="intro-subtitle">
         Răspunde la câteva întrebări despre tine, apoi trecem la quiz-ul personalizat.<br>
-        Promit: durează puțin și nu ustură deloc. 🌿
+        Promit: durează puțin și nu ustură deloc. 
       </p>
 
       <div class="intro-features">
@@ -1179,7 +1179,7 @@
         <div class="profile-error" id="profile-error">Te rog completează toate câmpurile înainte să pornim quiz-ul.</div>
       </div>
 
-      <button class="btn" onclick="startQuiz()">Începem quiz-ul 🐝</button>
+      <button class="btn" onclick="startQuiz()">Începem quiz-ul</button>
     </div>
   </div>
 
@@ -1189,7 +1189,7 @@
       <div class="quiz-header">
         <div class="progress-top">
           <span class="progress-label" id="progress-label">1 din 10</span>
-          <span class="honey-score">🍯 <span id="score-label">0</span> borcane</span>
+          <span class="honey-score"><span id="score-label">0</span> borcane cu miere</span>
         </div>
         <div class="progress-bar">
           <div class="progress-fill" id="progress-fill"></div>
@@ -1202,7 +1202,7 @@
       <div class="options" id="options-container"></div>
 
       <div class="next-btn-wrap" id="next-btn-wrap">
-        <button class="btn" id="next-btn" onclick="nextQuestion()">Următoarea →</button>
+        <button class="btn" id="next-btn" onclick="nextQuestion()">Următoarea</button>
       </div>
     </div>
   </div>
@@ -1222,7 +1222,7 @@
           <span class="score-number" id="final-score">0</span>
           <span class="score-label">/30</span>
         </div>
-        <div class="score-subtitle">🍯 borcane de miere strânse</div>
+        <div class="score-subtitle">surpriza la final</div>
       </div>
 
       <h2 class="diagnosis-title" id="diagnosis-title"></h2>
@@ -1232,7 +1232,7 @@
         <div class="gift-sparkles" aria-hidden="true">
           <span>✨</span><span>🎉</span><span>⭐</span><span>✨</span><span>🌟</span><span>💫</span>
         </div>
-        <div class="gift-badge">🎁 Ai deblocat un cadou!</div>
+        <div class="gift-badge">Ai deblocat un cadou</div>
         <div class="gift-intro">Zzzumzi și Spring Farma ți-au pregătit o recomandare personalizată pentru tine.</div>
         <div class="gift-product-wrap">
           <div class="gift-image-frame">
@@ -1245,26 +1245,26 @@
           </div>
         </div>
         <div class="gift-code-box">
-          <span class="gift-code-label">🎟️ Codul tău special</span>
+          <span class="gift-code-label">Codul tău special</span>
           <strong id="gift-product-code" class="gift-product-code">ENERGIE10</strong>
           <span class="gift-code-help">Extra 10% reducere la produsul recomandat</span>
         </div>
-        <a id="gift-product-link" class="gift-product-button" href="#" target="_blank" rel="noopener">Revendică-ți cadoul 🎁</a>
+        <a id="gift-product-link" class="gift-product-button" href="#" target="_blank" rel="noopener">Revendică-ți cadoul</a>
       </div>
 
       <div class="cta-box">
-        <div class="cta-title">🌿 Sănătatea la un click distanță!</div>
+        <div class="cta-title">Sănătatea la un click distanță!</div>
         <div class="cta-text">
           Spring Farma îți aduce produsele direct acasă.<br>
           Cele mai mici prețuri de pe piață, garantat!
         </div>
-        <a href="https://springfarma.com" target="_blank" class="btn">Vizitează Spring Farma 🛒</a>
+        <a href="https://springfarma.com" target="_blank" class="btn">Vizitează Spring Farma</a>
       </div>
 
-      <button class="btn btn-outline" onclick="restartQuiz()">🔄 Mai încearcă o dată</button>
+      <button class="btn btn-outline" onclick="restartQuiz()">Mai încearcă o dată</button>
 
       <div class="footer-brand">
-        Cu drag, <strong>Zzzumzi</strong> 🐝 de la <strong>Spring Farma</strong>
+        Cu drag, <strong>Zzzumzi</strong> de la <strong>Spring Farma</strong>
       </div>
     </div>
   </div>
@@ -1289,100 +1289,100 @@
 const allQuestions = [
   // === HIDRATARE & ALIMENTAȚIE (10) ===
   {
-    category: "💧 Hidratare",
+    category: "Hidratare",
     question: "Câte pahare de apă bei într-o zi obișnuită?",
     options: [
-      { text: "8+ pahare — sunt hidratat ca o floare după ploaie 🌸", points: 3, comment: "UAU! Ești mai hidratat decât un stup întreg. Fetelor, luați notițe!" },
+      { text: "8+ pahare — sunt hidratat ca o floare după ploaie", points: 3, comment: "UAU! Ești mai hidratat decât un stup întreg. Fetelor, luați notițe!" },
       { text: "4-6 pahare — rezonabil, nu?", points: 2, comment: "Rezonabil, da. Dar eu cred în tine — mai trage două pahare și ești gata!" },
       { text: "1-3 pahare — cafeaua nu se pune?", points: 1, comment: "Scumpule, cafeaua NU e apă. Am verificat. De două ori." },
-      { text: "Apă? Ce e aia? 🧃", points: 0, comment: "Bzzz... eu zbor toată ziua și tot beau apă. Măcar un pahar, te rog!" }
+      { text: "Apă? Ce e aia?", points: 0, comment: "Bzzz... eu zbor toată ziua și tot beau apă. Măcar un pahar, te rog!" }
     ]
   },
   {
-    category: "🍎 Alimentație",
+    category: "Alimentație",
     question: "Câte porții de fructe și legume mănânci pe zi?",
     options: [
-      { text: "5+ porții — sunt prietenul albinelor! 🌻", points: 3, comment: "Ești o legendă! Când cresc mare, vreau să mănânc ca tine!" },
+      { text: "5+ porții — sunt prietenul albinelor!", points: 3, comment: "Ești o legendă! Când cresc mare, vreau să mănânc ca tine!" },
       { text: "2-4 porții — variat și decent", points: 2, comment: "Bună treabă! Mai adaugă o salată și devii oficial VIP-ul stupului!" },
       { text: "1 porție, dacă îmi amintesc", points: 1, comment: "Hmm... o banană pe săptămână NU te face sănătos. Îmi pare rău!" },
-      { text: "Ketchup-ul contează ca legumă? 🤔", points: 0, comment: "Nu, scumpule. Și nici pizza cu roșii. Am întrebat-o pe mama albină!" }
+      { text: "Ketchup-ul contează ca legumă?", points: 0, comment: "Nu, scumpule. Și nici pizza cu roșii. Am întrebat-o pe mama albină!" }
     ]
   },
   {
-    category: "🍬 Zahăr",
+    category: "Zahăr",
     question: "Cât zahăr consumi zilnic (dulciuri, sucuri, cafea)?",
     options: [
-      { text: "Foarte puțin — prefer fructele proaspete 🍓", points: 3, comment: "Disciplină de regină! Eu fac miere, dar nici eu nu mănânc atât!" },
+      { text: "Foarte puțin — prefer fructele proaspete", points: 3, comment: "Disciplină de regină! Eu fac miere, dar nici eu nu mănânc atât!" },
       { text: "Moderat — îmi permit ocazional", points: 2, comment: "Echilibru perfect! Viața fără dulce e tristă, ai dreptate!" },
-      { text: "Destul de mult, recunosc 🍰", points: 1, comment: "Te văd, te văd! Zahărul e prietenul fals — îți dă energie și ți-o fură!" },
-      { text: "Zahărul e al 5-lea macronutrient al meu 🍩", points: 0, comment: "Bzzz! Eu fac miere și tot nu mănânc atâta. Revizuim împreună?" }
+      { text: "Destul de mult, recunosc", points: 1, comment: "Te văd, te văd! Zahărul e prietenul fals — îți dă energie și ți-o fură!" },
+      { text: "Zahărul e al 5-lea macronutrient al meu", points: 0, comment: "Bzzz! Eu fac miere și tot nu mănânc atâta. Revizuim împreună?" }
     ]
   },
   {
-    category: "🥤 Hidratare",
+    category: "Hidratare",
     question: "Ce bei cel mai des în afară de apă?",
     options: [
-      { text: "Ceai de plante sau infuzii 🍵", points: 3, comment: "Ești o vrăjitoare modernă și îmi place! Ceaiul e magie lichidă!" },
+      { text: "Ceai de plante sau infuzii", points: 3, comment: "Ești o vrăjitoare modernă și îmi place! Ceaiul e magie lichidă!" },
       { text: "Sucuri naturale, cafea cu moderație", points: 2, comment: "Bună alegere! Cafeaua e prietena mea, dar cu limită — ca relațiile toxice!" },
       { text: "Cafea cu zahăr, poate un suc", points: 1, comment: "Mmm... zahărul e ca un ex care te sună la 3 dimineața. Fugi!" },
-      { text: "Energizante și cole non-stop ⚡", points: 0, comment: "Scumpule, inima ta îmi trimite SMS-uri. Vrea să te relaxezi!" }
+      { text: "Energizante și cole non-stop", points: 0, comment: "Scumpule, inima ta îmi trimite SMS-uri. Vrea să te relaxezi!" }
     ]
   },
   {
-    category: "🍳 Alimentație",
+    category: "Alimentație",
     question: "Iei micul dejun dimineața?",
     options: [
-      { text: "Da, în fiecare zi, variat și nutritiv 🥣", points: 3, comment: "Perfect! Micul dejun e combustibilul zilei. Ești o mașinărie!" },
+      { text: "Da, în fiecare zi, variat și nutritiv", points: 3, comment: "Perfect! Micul dejun e combustibilul zilei. Ești o mașinărie!" },
       { text: "Aproape zilnic, dar nu mereu", points: 2, comment: "Bine! Mai îmbunătățim puțin și suntem gata de Olimpiadă!" },
-      { text: "Doar o cafea, de obicei ☕", points: 1, comment: "Cafeaua singură e ca un dans fără muzică. Adaugă ceva, te rog!" },
-      { text: "Nu, sar peste el cu spor 🚫", points: 0, comment: "Bzzz! Corpul tău se trezește flămând. Măcar un fruct, da?" }
+      { text: "Doar o cafea, de obicei", points: 1, comment: "Cafeaua singură e ca un dans fără muzică. Adaugă ceva, te rog!" },
+      { text: "Nu, sar peste el cu spor", points: 0, comment: "Bzzz! Corpul tău se trezește flămând. Măcar un fruct, da?" }
     ]
   },
   {
-    category: "🧂 Alimentație",
+    category: "Alimentație",
     question: "Cât de des mănânci fast food/mâncare procesată?",
     options: [
-      { text: "Rar, poate o dată pe lună 🥗", points: 3, comment: "Respect! Corpul tău îți trimite scrisori de mulțumire!" },
+      { text: "Rar, poate o dată pe lună", points: 3, comment: "Respect! Corpul tău îți trimite scrisori de mulțumire!" },
       { text: "O dată pe săptămână, cam așa", points: 2, comment: "Echilibrat și normal. Ești om, nu robot din Minecraft!" },
-      { text: "De 2-3 ori pe săptămână 🍔", points: 1, comment: "Hmm... prea mult. Stomacul tău are nevoie de o vacanță!" },
+      { text: "De 2-3 ori pe săptămână", points: 1, comment: "Hmm... prea mult. Stomacul tău are nevoie de o vacanță!" },
       { text: "Zilnic — cine are timp să gătească?", points: 0, comment: "Oh, scumpule. Hai să găsim niște soluții rapide și sănătoase!" }
     ]
   },
   {
-    category: "🥦 Alimentație",
+    category: "Alimentație",
     question: "Mănânci legume verzi?",
     options: [
-      { text: "Zilnic — salate, spanac, broccoli ✨", points: 3, comment: "Verde ca un feed de Instagram bine ales! Albinele te iubesc!" },
+      { text: "Zilnic — salate, spanac, broccoli", points: 3, comment: "Verde ca un feed de Instagram bine ales! Albinele te iubesc!" },
       { text: "De câteva ori pe săptămână", points: 2, comment: "Bună rutină! Verdețurile sunt combustibilul regal!" },
       { text: "Rar, nu le agreez", points: 1, comment: "Te înțeleg, dar încearcă cu hummus sau brânză — trișează puțin!" },
-      { text: "Verdele e pentru iepuri 🥬", points: 0, comment: "Știi ce face iepurele? Sare. Știi de ce? Legume! 🥕" }
+      { text: "Verdele e pentru iepuri", points: 0, comment: "Știi ce face iepurele? Sare. Știi de ce? Legume!" }
     ]
   },
   {
-    category: "🐟 Alimentație",
+    category: "Alimentație",
     question: "Consumi pește / surse de Omega 3?",
     options: [
-      { text: "Da, de 2-3 ori pe săptămână 🐟", points: 3, comment: "Creierul tău zumzăie de fericire! Omega 3 e aur pur!" },
+      { text: "Da, de 2-3 ori pe săptămână", points: 3, comment: "Creierul tău zumzăie de fericire! Omega 3 e aur pur!" },
       { text: "Ocazional — nuci, semințe, pește", points: 2, comment: "Varietate frumoasă! Diversitatea e regina sănătății!" },
       { text: "Rar, poate o dată pe lună", points: 1, comment: "Mai încearcă niște nuci sau semințe de in — sunt mici, dar puternice!" },
-      { text: "Omega ce? 🤷", points: 0, comment: "Omega 3 e ca vitamina pentru creier. Zzzumzi recomandă!" }
+      { text: "Omega ce?", points: 0, comment: "Omega 3 e ca vitamina pentru creier. Zzzumzi recomandă!" }
     ]
   },
   {
-    category: "🧃 Hidratare",
+    category: "Hidratare",
     question: "Primul lucru pe care îl bei dimineața?",
     options: [
-      { text: "Un pahar mare de apă 💧", points: 3, comment: "Campionul meu! Așa se pornește ziua, cu stil!" },
+      { text: "Un pahar mare de apă", points: 3, comment: "Campionul meu! Așa se pornește ziua, cu stil!" },
       { text: "Apă cu lămâie sau ceai", points: 3, comment: "Super! Lămâia + apa = combo perfect pentru trezire!" },
-      { text: "Cafea direct, apoi poate apă ☕", points: 1, comment: "Cafea pe stomac gol? Aoleu! Măcar un pahar de apă întâi!" },
+      { text: "Cafea direct, apoi poate apă", points: 1, comment: "Cafea pe stomac gol? Aoleu! Măcar un pahar de apă întâi!" },
       { text: "Nimic, nu îmi e sete dimineața", points: 0, comment: "Corpul tău s-a deshidratat toată noaptea! Apa e salvarea!" }
     ]
   },
   {
-    category: "🍽️ Alimentație",
+    category: "Alimentație",
     question: "Mănânci mese regulate sau doar când îți amintești?",
     options: [
-      { text: "3 mese pe zi + 1-2 gustări sănătoase 📅", points: 3, comment: "Rutină de Rolls Royce! Metabolismul tău îți mulțumește!" },
+      { text: "3 mese pe zi + 1-2 gustări sănătoase", points: 3, comment: "Rutină de Rolls Royce! Metabolismul tău îți mulțumește!" },
       { text: "Cam regulat, cu mici variații", points: 2, comment: "Flexibilitate sănătoasă. Ești o albină pragmatică!" },
       { text: "Sar peste mese destul de des", points: 1, comment: "Ups! Corpul tău crede că ești pe o insulă pustie. Alimentează-l!" },
       { text: "Mănânc când îmi amintesc (rar)", points: 0, comment: "Scumpule, setează-ți alarme! Corpul tău are nevoie de tine!" }
@@ -1391,80 +1391,80 @@ const allQuestions = [
 
   // === SOMN & ODIHNĂ (8) ===
   {
-    category: "😴 Somn",
+    category: "Somn",
     question: "Câte ore dormi în medie pe noapte?",
     options: [
-      { text: "7-9 ore — dorm ca o albină în stup 🛏️", points: 3, comment: "Perfect! Somnul e ca mierea — dulce, dens și esențial!" },
+      { text: "7-9 ore — dorm ca o albină în stup", points: 3, comment: "Perfect! Somnul e ca mierea — dulce, dens și esențial!" },
       { text: "6-7 ore — mă descurc", points: 2, comment: "Aproape! Mai fură 30 de minute de la Netflix — seriile te așteaptă!" },
       { text: "5-6 ore — cafeaua mă ține treaz", points: 1, comment: "Atenție! Chiar și albinele regine dorm. Iar eu sunt obosită doar privindu-te!" },
-      { text: "Ce e somnul? TikTok nu doarme niciodată 📱", points: 0, comment: "Oh, scumpule... telefonul jos, capul pe pernă. URGENT!" }
+      { text: "Ce e somnul? TikTok nu doarme niciodată", points: 0, comment: "Oh, scumpule... telefonul jos, capul pe pernă. URGENT!" }
     ]
   },
   {
-    category: "☀️ Somn",
+    category: "Somn",
     question: "Te trezești odihnit dimineața?",
     options: [
-      { text: "Da, zumzăi de energie! ⚡", points: 3, comment: "Fantastic! Ești mai fresh decât polenul de dimineață!" },
+      { text: "Da, zumzăi de energie!", points: 3, comment: "Fantastic! Ești mai fresh decât polenul de dimineață!" },
       { text: "După prima cafea, da", points: 2, comment: "Tipic uman! Încearcă o săptămână fără cafea — vei fi surprins!" },
-      { text: "Greu, foarte greu... ☕☕☕", points: 1, comment: "Oh no! Poate e vremea pentru niște magneziu de la Spring Farma?" },
+      { text: "Greu, foarte greu...", points: 1, comment: "Oh no! Poate e vremea pentru niște magneziu de la Spring Farma?" },
       { text: "Sună alarma de 7 ori și tot dorm", points: 0, comment: "Alarma ta a renunțat la viață. Și eu, uitându-mă la ea!" }
     ]
   },
   {
-    category: "📱 Somn",
+    category: "Somn",
     question: "Cu cât timp înainte de culcare lași telefonul?",
     options: [
-      { text: "Cu cel puțin o oră înainte 📵", points: 3, comment: "Ești un zen master! Creierul tău doarme ca un bebeluș!" },
+      { text: "Cu cel puțin o oră înainte", points: 3, comment: "Ești un zen master! Creierul tău doarme ca un bebeluș!" },
       { text: "Vreo 30 de minute înainte", points: 2, comment: "Bine! Mai adaugă 30 și ai atins nirvana somnului!" },
-      { text: "Până adorm cu el în mână 📱", points: 1, comment: "Ecranul albastru e vrăjitoare rea. Fugi de el!" },
+      { text: "Până adorm cu el în mână", points: 1, comment: "Ecranul albastru e vrăjitoare rea. Fugi de el!" },
       { text: "Adorm cu TikTok pornit", points: 0, comment: "Oh, scumpule! Creierul tău nu se oprește niciodată! Pauză!" }
     ]
   },
   {
-    category: "🌙 Somn",
+    category: "Somn",
     question: "Ai un program fix de culcare?",
     options: [
-      { text: "Da, mă culc și mă trezesc la aceleași ore ⏰", points: 3, comment: "Disciplină elvețiană! Corpul tău te iubește enorm!" },
+      { text: "Da, mă culc și mă trezesc la aceleași ore", points: 3, comment: "Disciplină elvețiană! Corpul tău te iubește enorm!" },
       { text: "Aproximativ — cam aceeași oră", points: 2, comment: "Super! Mici variații sunt normale. Ești om, nu ceas!" },
       { text: "Variat — depinde de zi", points: 1, comment: "Hmm... corpul tău e confuz ca un GPS fără semnal!" },
-      { text: "Mă culc când mă prinde somnul 🌙", points: 0, comment: "Bzzz! Ritmul circadian al tău a luat vacanță permanentă!" }
+      { text: "Mă culc când mă prinde somnul", points: 0, comment: "Bzzz! Ritmul circadian al tău a luat vacanță permanentă!" }
     ]
   },
   {
-    category: "😴 Somn",
+    category: "Somn",
     question: "Te trezești în timpul nopții?",
     options: [
-      { text: "Rar, dorm neîntrerupt 🌟", points: 3, comment: "Perfect! Somnul de calitate e superputerea ta!" },
+      { text: "Rar, dorm neîntrerupt", points: 3, comment: "Perfect! Somnul de calitate e superputerea ta!" },
       { text: "Ocazional, o dată pe noapte", points: 2, comment: "Normal, scumpule. Chiar și albinele se mai trezesc!" },
       { text: "Destul de des, nu dorm profund", points: 1, comment: "Hmm... poate un ceai de valeriană? Spring Farma are, șoaptă-șoaptă!" },
       { text: "Mereu, parcă nici nu dorm", points: 0, comment: "Scumpule, ai nevoie de ajutor! Nu e normal și nu trebuie să suferi!" }
     ]
   },
   {
-    category: "☕ Somn",
+    category: "Somn",
     question: "Bei cafea după ora 15:00?",
     options: [
-      { text: "Niciodată — după 12:00 e apă și ceai ✨", points: 3, comment: "Disciplină de samurai! Somnul tău e protejat ca trezoreria!" },
+      { text: "Niciodată — după 12:00 e apă și ceai", points: 3, comment: "Disciplină de samurai! Somnul tău e protejat ca trezoreria!" },
       { text: "Rar, doar ocazional", points: 2, comment: "Bună! Cafeaua de după-amiază e ca un musafir nepoftit!" },
-      { text: "Da, cam mereu o cafea de seară ☕", points: 1, comment: "Și apoi te întrebi de ce nu adormi... Misterul e rezolvat!" },
-      { text: "Beau cafea și la 10 seara 🙃", points: 0, comment: "Bzzz! Somnul tău plânge. Și eu, cu el!" }
+      { text: "Da, cam mereu o cafea de seară", points: 1, comment: "Și apoi te întrebi de ce nu adormi... Misterul e rezolvat!" },
+      { text: "Beau cafea și la 10 seara", points: 0, comment: "Bzzz! Somnul tău plânge. Și eu, cu el!" }
     ]
   },
   {
-    category: "🛏️ Somn",
+    category: "Somn",
     question: "Dormi cu telefonul sub pernă/lângă pat?",
     options: [
-      { text: "Nu, e în altă cameră 📴", points: 3, comment: "Respect maxim! Creierul tău e relaxat ca la spa!" },
+      { text: "Nu, e în altă cameră", points: 3, comment: "Respect maxim! Creierul tău e relaxat ca la spa!" },
       { text: "Lângă pat, dar pe 'do not disturb'", points: 2, comment: "Compromis înțelept! Ești un diplomat al somnului!" },
       { text: "Sub pernă, ca să aud alarma", points: 1, comment: "Undele alea nu-ți plac. Pune-l măcar pe noptieră!" },
-      { text: "În mână, practic 📱", points: 0, comment: "Scumpule, telefonul tău primește mai multă atenție decât partenerul!" }
+      { text: "În mână, practic", points: 0, comment: "Scumpule, telefonul tău primește mai multă atenție decât partenerul!" }
     ]
   },
   {
-    category: "🌞 Somn",
+    category: "Somn",
     question: "Tragi pui de somn (nap) peste zi?",
     options: [
-      { text: "Da, un power nap de 20 min 💤", points: 3, comment: "Tu înțelegi viața! Napul e un cadou pentru creier!" },
+      { text: "Da, un power nap de 20 min", points: 3, comment: "Tu înțelegi viața! Napul e un cadou pentru creier!" },
       { text: "Ocazional, când sunt foarte obosit", points: 2, comment: "Echilibru bun! Când ai nevoie, nu refuzi. Smart move!" },
       { text: "Nu, nu pot să adorm ziua", points: 2, comment: "Nimic greșit! Unii suntem vulturi, alții bufnițe!" },
       { text: "Dorm 3 ore și apoi nu mai pot noaptea", points: 0, comment: "Ups! Napul e 20 min, nu o vacanță! Setează alarmă!" }
@@ -1473,142 +1473,142 @@ const allQuestions = [
 
   // === MIȘCARE & SPORT (8) ===
   {
-    category: "🏃 Mișcare",
+    category: "Mișcare",
     question: "Cât de des faci mișcare pe săptămână?",
     options: [
-      { text: "4+ ori — sunt un stup pe două picioare 💪", points: 3, comment: "UAU! Ești mai activ decât mine, și eu bat din aripi de 200 de ori pe secundă!" },
+      { text: "4+ ori — sunt un stup pe două picioare", points: 3, comment: "UAU! Ești mai activ decât mine, și eu bat din aripi de 200 de ori pe secundă!" },
       { text: "2-3 ori — încerc, serios!", points: 2, comment: "Frumos! Consistența bate intensitatea oricând — ești pe drumul bun!" },
       { text: "Odată pe săptămână, poate", points: 1, comment: "Hmm... corpul tău vrea să danseze mai mult! Dă-i voie!" },
-      { text: "Doar când fug după autobuz 🏃💨", points: 0, comment: "Bzzz! Chiar și o plimbare de 15 minute ajută. Promit!" }
+      { text: "Doar când fug după autobuz", points: 0, comment: "Bzzz! Chiar și o plimbare de 15 minute ajută. Promit!" }
     ]
   },
   {
-    category: "🚶 Mișcare",
+    category: "Mișcare",
     question: "Câți pași faci în medie pe zi?",
     options: [
-      { text: "10.000+ pași, sunt campion 🥇", points: 3, comment: "Ești o gazelă modernă! Inima ta bate samba de bucurie!" },
+      { text: "10.000+ pași, sunt campion", points: 3, comment: "Ești o gazelă modernă! Inima ta bate samba de bucurie!" },
       { text: "6.000-10.000 pași", points: 2, comment: "Super! Aproape de țintă — încă câteva plimbări și ești acolo!" },
       { text: "3.000-6.000 pași", points: 1, comment: "Hmm... scaunul e comod, știu. Dar plimbările sunt magie!" },
-      { text: "Mai puțin de 3.000 — muncesc la birou 💻", points: 0, comment: "Oh scumpule, măcar la fiecare oră ridică-te! Corpul tău te imploră!" }
+      { text: "Mai puțin de 3.000 — muncesc la birou", points: 0, comment: "Oh scumpule, măcar la fiecare oră ridică-te! Corpul tău te imploră!" }
     ]
   },
   {
-    category: "🧘 Mișcare",
+    category: "Mișcare",
     question: "Faci stretching sau yoga?",
     options: [
-      { text: "Da, zilnic — corpul meu e fericit 🧘", points: 3, comment: "Flexibil ca o pisică! Invidie pură, serios!" },
+      { text: "Da, zilnic — corpul meu e fericit", points: 3, comment: "Flexibil ca o pisică! Invidie pură, serios!" },
       { text: "Ocazional, mai ales după sport", points: 2, comment: "Bună rutină! Stretching-ul e like & subscribe pentru corp!" },
       { text: "Rar, când îmi amintesc", points: 1, comment: "Corpul tău are contracturi. Se plânge. Te aude?" },
       { text: "Nu, nu am timp / nu știu cum", points: 0, comment: "Bzzz! 5 minute pe YouTube schimbă viața! Încearcă!" }
     ]
   },
   {
-    category: "💪 Mișcare",
+    category: "Mișcare",
     question: "Faci exerciții de forță (greutăți)?",
     options: [
-      { text: "Da, de 2-3 ori pe săptămână 🏋️", points: 3, comment: "Forță de campion! Oasele tale vor fi recunoscătoare la 70 de ani!" },
+      { text: "Da, de 2-3 ori pe săptămână", points: 3, comment: "Forță de campion! Oasele tale vor fi recunoscătoare la 70 de ani!" },
       { text: "Ocazional, când pot", points: 2, comment: "Bine! Începe cu ce poți — consistența învinge intensitatea!" },
       { text: "Fac doar cardio", points: 1, comment: "Cardio e bun, dar forța e REGINA! Adaugă un pic, te rog!" },
-      { text: "Greutăți? Sunt speriat 😨", points: 0, comment: "Nu mușcă! Începe cu ce ai în casă — sticle de apă, saci cu orez!" }
+      { text: "Greutăți? Sunt speriat", points: 0, comment: "Nu mușcă! Începe cu ce ai în casă — sticle de apă, saci cu orez!" }
     ]
   },
   {
-    category: "🌳 Mișcare",
+    category: "Mișcare",
     question: "Faci mișcare în aer liber?",
     options: [
-      { text: "Da, aproape zilnic 🌲", points: 3, comment: "Ești o nimfă a pădurii! Și eu, albina, aprob 100%!" },
+      { text: "Da, aproape zilnic", points: 3, comment: "Ești o nimfă a pădurii! Și eu, albina, aprob 100%!" },
       { text: "Weekend-urile, da", points: 2, comment: "Bună rutină! Natura e spa-ul gratuit al sufletului!" },
       { text: "Rar — mai mult sală", points: 1, comment: "Sala e ok, dar natura... natura e magie pură!" },
-      { text: "Aer liber = de la ușă la mașină 🚗", points: 0, comment: "Bzzz! Soarele are vitamina D pentru tine! Ieși, te rog!" }
+      { text: "Aer liber = de la ușă la mașină", points: 0, comment: "Bzzz! Soarele are vitamina D pentru tine! Ieși, te rog!" }
     ]
   },
   {
-    category: "🏃 Mișcare",
+    category: "Mișcare",
     question: "Ai o activitate sportivă preferată?",
     options: [
-      { text: "Da, și mă pasionează 💖", points: 3, comment: "Pasiunea + sportul = rețeta fericirii! Perfect!" },
+      { text: "Da, și mă pasionează", points: 3, comment: "Pasiunea + sportul = rețeta fericirii! Perfect!" },
       { text: "Mai multe — încerc diverse", points: 3, comment: "Diversitate înseamnă progres! Ești un explorator!" },
       { text: "Nu prea... fac ce se nimerește", points: 1, comment: "Găsește-ți una pe care o iubești! E ca dragostea — trebuie să clicheze!" },
-      { text: "Sportul nu e pentru mine 🙅", points: 0, comment: "E pentru TOATĂ lumea! Poate dansul? Înotul? Mersul pe jos?" }
+      { text: "Sportul nu e pentru mine", points: 0, comment: "E pentru TOATĂ lumea! Poate dansul? Înotul? Mersul pe jos?" }
     ]
   },
   {
-    category: "🧗 Mișcare",
+    category: "Mișcare",
     question: "Urci pe scări sau folosești liftul?",
     options: [
-      { text: "Mereu pe scări — e gym gratis 🏃", points: 3, comment: "Inima ta face dans de bucurie! Mișto geniul!" },
+      { text: "Mereu pe scări — e gym gratis", points: 3, comment: "Inima ta face dans de bucurie! Mișto geniul!" },
       { text: "Depinde — până la etajul 3 pe scări", points: 2, comment: "Decizie înțeleaptă! Echilibru între efort și lene!" },
       { text: "Doar dacă liftul e stricat", points: 1, comment: "Liftul te face leneș, scumpule! Provoacă-te!" },
       { text: "Liftul e prietenul meu cel mai bun", points: 0, comment: "Mutați prietenia pe scări! Corpul tău îți va trimite flori!" }
     ]
   },
   {
-    category: "🤸 Mișcare",
+    category: "Mișcare",
     question: "Simți că stai prea mult pe scaun?",
     options: [
-      { text: "Nu, mă mișc constant peste zi 🚶", points: 3, comment: "Ești un perpetuum mobile! Invidie sănătoasă!" },
+      { text: "Nu, mă mișc constant peste zi", points: 3, comment: "Ești un perpetuum mobile! Invidie sănătoasă!" },
       { text: "Uneori, dar fac pauze regulate", points: 2, comment: "Conștient și proactiv! Așa se procedează!" },
       { text: "Da, stau 8+ ore zilnic pe scaun", points: 1, comment: "Fundul tău plânge, scumpule! Ridică-te la fiecare oră!" },
-      { text: "Scaunul și cu mine ne-am căsătorit 💍", points: 0, comment: "Divorț urgent! Corpul tău merită libertate!" }
+      { text: "Scaunul și cu mine ne-am căsătorit", points: 0, comment: "Divorț urgent! Corpul tău merită libertate!" }
     ]
   },
 
   // === VITAMINE & SUPLIMENTE (6) ===
   {
-    category: "💊 Vitamine",
+    category: "Vitamine",
     question: "Iarna, te gândești la vitamine?",
     options: [
-      { text: "Da, vitamina D și C sunt prietenele mele! ☀️", points: 3, comment: "Bravo! Iarna, soarele se ascunde — vitamina D e esențială!" },
+      { text: "Da, vitamina D și C sunt prietenele mele!", points: 3, comment: "Bravo! Iarna, soarele se ascunde — vitamina D e esențială!" },
       { text: "Iau ocazional, când îmi aduc aminte", points: 2, comment: "Consistența contează! Pune-ți un reminder — va face minuni!" },
-      { text: "Doar când deja am răcit 🤧", points: 1, comment: "Prea târziu, scumpule! Prevenția e cheia — nu post-factum!" },
+      { text: "Doar când deja am răcit", points: 1, comment: "Prea târziu, scumpule! Prevenția e cheia — nu post-factum!" },
       { text: "Vitaminele? Nu știu, e complicat...", points: 0, comment: "Nu e complicat! Vino pe Spring Farma, Zzzumzi te ghidează personal!" }
     ]
   },
   {
-    category: "☀️ Vitamine",
+    category: "Vitamine",
     question: "Știi nivelul tău de vitamina D?",
     options: [
-      { text: "Da, fac analize anuale 📊", points: 3, comment: "Ești un Sherlock al sănătății! Medicul tău te iubește!" },
+      { text: "Da, fac analize anuale", points: 3, comment: "Ești un Sherlock al sănătății! Medicul tău te iubește!" },
       { text: "Am făcut o dată, demult", points: 2, comment: "Ok, dar ar fi timpul să verifici din nou! Nivelurile se schimbă!" },
       { text: "Nu — stau la soare, deci e ok?", points: 1, comment: "Ups! În România, vitamina D e problematică 6 luni pe an!" },
       { text: "Vitamina D... există?", points: 0, comment: "Există, există! Și probabil ai deficit. 80% din români au!" }
     ]
   },
   {
-    category: "🧲 Vitamine",
+    category: "Vitamine",
     question: "Iei magneziu pentru stres/crampe/somn?",
     options: [
-      { text: "Da, îl iau regulat și mă simt minunat ✨", points: 3, comment: "Magneziul e un mic erou! Bine făcut, scumpule!" },
+      { text: "Da, îl iau regulat și mă simt minunat", points: 3, comment: "Magneziul e un mic erou! Bine făcut, scumpule!" },
       { text: "Ocazional, când am nevoie", points: 2, comment: "Bună decizie! Ascultarea corpului e artă, nu știință!" },
       { text: "Am auzit de el, dar nu iau", points: 1, comment: "Magneziul e MVP-ul mineralelor! Merită o șansă!" },
       { text: "Magneziu? Credeam că e pentru atleți", points: 0, comment: "E pentru TOȚI, scumpule! Stres, crampe, somn — magie pură!" }
     ]
   },
   {
-    category: "🌿 Vitamine",
+    category: "Vitamine",
     question: "Iei probiotice pentru sănătatea digestivă?",
     options: [
-      { text: "Da, mai ales după antibiotice 🦠", points: 3, comment: "Microbiomul tău îți trimite cadouri! Excelent!" },
+      { text: "Da, mai ales după antibiotice", points: 3, comment: "Microbiomul tău îți trimite cadouri! Excelent!" },
       { text: "Ocazional, pentru imunitate", points: 2, comment: "Bună strategie! Intestinul fericit = tu fericit!" },
       { text: "Mănânc iaurt, să conteze?", points: 2, comment: "Da, contează! Iaurtul e un probiotic natural minunat!" },
-      { text: "Probio-ce? 🤔", points: 0, comment: "Bacterii bune care te ajută! Sunt ca prietenii tăi din stomac!" }
+      { text: "Probio-ce?", points: 0, comment: "Bacterii bune care te ajută! Sunt ca prietenii tăi din stomac!" }
     ]
   },
   {
-    category: "💊 Vitamine",
+    category: "Vitamine",
     question: "Cum alegi suplimentele pe care le iei?",
     options: [
-      { text: "După recomandarea medicului/farmacistului 👩‍⚕️", points: 3, comment: "Abordare profesionistă! Exact cum trebuie, scumpule!" },
+      { text: "După recomandarea medicului/farmacistului", points: 3, comment: "Abordare profesionistă! Exact cum trebuie, scumpule!" },
       { text: "Cercetez online, citesc review-uri", points: 2, comment: "Diligent! Dar un farmacist e mai ieftin decât o eroare!" },
       { text: "Ce îmi recomandă prietenii", points: 1, comment: "Prietenii sunt scumpi, dar farmacistul are studii. Întreabă-l!" },
-      { text: "Iau ce văd în reclamă 📺", points: 0, comment: "Oh nu! Reclama vrea banii tăi, nu sănătatea ta!" }
+      { text: "Iau ce văd în reclamă", points: 0, comment: "Oh nu! Reclama vrea banii tăi, nu sănătatea ta!" }
     ]
   },
   {
-    category: "🍊 Vitamine",
+    category: "Vitamine",
     question: "Iei vitamina C regulat?",
     options: [
-      { text: "Da, zilnic, prin alimentație sau suplimente 🍋", points: 3, comment: "Imunitatea ta e un fort de neînvins!" },
+      { text: "Da, zilnic, prin alimentație sau suplimente", points: 3, comment: "Imunitatea ta e un fort de neînvins!" },
       { text: "Iarna și când mă simt rău", points: 2, comment: "Bună strategie sezonieră! Așa procedează profesioniștii!" },
       { text: "Nu, dar mănânc ocazional citrice", points: 1, comment: "Citricele sunt super! Mai adaugă un kiwi și ești eroul meu!" },
       { text: "Vitamina C? Pastilele alea efervescente?", points: 0, comment: "Efervescentele sunt un început bun! Vino pe Spring Farma!" }
@@ -1617,182 +1617,182 @@ const allQuestions = [
 
   // === SĂNĂTATE MENTALĂ & STRES (8) ===
   {
-    category: "🧘 Sănătate Mentală",
+    category: "Sănătate Mentală",
     question: "Cum gestionezi stresul zilnic?",
     options: [
-      { text: "Meditez, respir adânc, îmi iau pauze 🧘", points: 3, comment: "Zen de albină! Mintea ta îți mulțumește cu flori!" },
+      { text: "Meditez, respir adânc, îmi iau pauze", points: 3, comment: "Zen de albină! Mintea ta îți mulțumește cu flori!" },
       { text: "Mă plimb, vorbesc cu prieteni", points: 2, comment: "Super! Conexiunile umane sunt ca stupul — ne țin vii!" },
       { text: "Mă uit la seriale și uit de toate", points: 1, comment: "Merge pe termen scurt, scumpule. Dar găsește și alte ventile!" },
-      { text: "Stres? Eu SUNT stresul 😵‍💫", points: 0, comment: "Oh nu! Bzzz, hai să inspirăm adânc împreună. E important!" }
+      { text: "Stres? Eu SUNT stresul", points: 0, comment: "Oh nu! Bzzz, hai să inspirăm adânc împreună. E important!" }
     ]
   },
   {
-    category: "😊 Sănătate Mentală",
+    category: "Sănătate Mentală",
     question: "Cât de des râzi cu poftă?",
     options: [
-      { text: "Zilnic — viața e o comedie! 😂", points: 3, comment: "Ești o regină! Râsul e medicament gratis!" },
+      { text: "Zilnic — viața e o comedie!", points: 3, comment: "Ești o regină! Râsul e medicament gratis!" },
       { text: "Destul de des, câteva ori pe săptămână", points: 2, comment: "Frumos! Continuă să cauți motive de zâmbit!" },
       { text: "Rar, sunt o persoană serioasă", points: 1, comment: "Seriozitatea e bună, dar râsul e vitamina sufletului! Încearcă!" },
-      { text: "Nu prea am motive de râs 😔", points: 0, comment: "Scumpule... te îmbrățișez virtual. Vrei să-ți spun o glumă? 🐝" }
+      { text: "Nu prea am motive de râs", points: 0, comment: "Scumpule... te îmbrățișez virtual. Vrei să-ți spun o glumă?" }
     ]
   },
   {
-    category: "💭 Sănătate Mentală",
+    category: "Sănătate Mentală",
     question: "Ai timp pentru tine, doar pentru tine?",
     options: [
-      { text: "Da, îmi prioritizez 'me time' 💖", points: 3, comment: "Înțelegi self-love-ul! Ești un exemplu, serios!" },
+      { text: "Da, îmi prioritizez 'me time'", points: 3, comment: "Înțelegi self-love-ul! Ești un exemplu, serios!" },
       { text: "Ocazional, când pot", points: 2, comment: "Bună! Fă-ți mai multe astfel de momente — meriți!" },
       { text: "Rar, mereu am ceva de făcut", points: 1, comment: "Scumpule, te rog! Fără me time, devii gol. Prioritizează!" },
-      { text: "Me time? Ce e aia? 🤯", points: 0, comment: "Oh no! Imediat! O oră pe săptămână DOAR pentru tine. Promit!" }
+      { text: "Me time? Ce e aia?", points: 0, comment: "Oh no! Imediat! O oră pe săptămână DOAR pentru tine. Promit!" }
     ]
   },
   {
-    category: "🧠 Sănătate Mentală",
+    category: "Sănătate Mentală",
     question: "Ai vorbit vreodată cu un psiholog/terapeut?",
     options: [
-      { text: "Da, merg regulat — e important 💚", points: 3, comment: "Ești un exemplu de maturitate emoțională! Respect imens!" },
+      { text: "Da, merg regulat — e important", points: 3, comment: "Ești un exemplu de maturitate emoțională! Respect imens!" },
       { text: "Am mers o perioadă, a ajutat", points: 3, comment: "Bine ai făcut! Terapia e ca dentistul — pentru suflet!" },
       { text: "Mă gândesc, dar nu încă", points: 2, comment: "Nu e nicio grabă, dar nici amâna prea mult, scumpule!" },
-      { text: "Nu, nu cred în așa ceva 🚫", points: 0, comment: "Terapia nu e religie, scumpule. E sănătate! Cel puțin informează-te!" }
+      { text: "Nu, nu cred în așa ceva", points: 0, comment: "Terapia nu e religie, scumpule. E sănătate! Cel puțin informează-te!" }
     ]
   },
   {
-    category: "📵 Sănătate Mentală",
+    category: "Sănătate Mentală",
     question: "Faci digital detox ocazional?",
     options: [
-      { text: "Da, zile întregi fără telefon 🌿", points: 3, comment: "Libertate pură! Creierul tău e un hamac relaxat!" },
+      { text: "Da, zile întregi fără telefon", points: 3, comment: "Libertate pură! Creierul tău e un hamac relaxat!" },
       { text: "Da, câteva ore pe zi", points: 2, comment: "Super! Micile pauze schimbă totul!" },
       { text: "Încerc, dar cedez repede", points: 1, comment: "Lupta e reală! Scroll-ul e drog. Pas cu pas, scumpule!" },
-      { text: "Telefonul e extensia mâinii mele 📱", points: 0, comment: "Nomofobia — există, e reală. Azi, 5 minute fără. Da?" }
+      { text: "Telefonul e extensia mâinii mele", points: 0, comment: "Nomofobia — există, e reală. Azi, 5 minute fără. Da?" }
     ]
   },
   {
-    category: "💬 Sănătate Mentală",
+    category: "Sănătate Mentală",
     question: "Ai oameni cu care vorbești despre probleme?",
     options: [
-      { text: "Da, am o rețea solidă 👯", points: 3, comment: "Bogăție adevărată! Stupul tău e plin de iubire!" },
+      { text: "Da, am o rețea solidă", points: 3, comment: "Bogăție adevărată! Stupul tău e plin de iubire!" },
       { text: "Am 1-2 oameni apropiați", points: 3, comment: "Asta contează! Calitate, nu cantitate, campionule!" },
       { text: "Mai mult vorbesc cu mine însumi", points: 1, comment: "Monologul e ok, dar dialogul e magic! Caută pe cineva!" },
-      { text: "Țin totul pentru mine 🤐", points: 0, comment: "Scumpule... asta doare pe termen lung. Cuvintele vor să zboare!" }
+      { text: "Țin totul pentru mine", points: 0, comment: "Scumpule... asta doare pe termen lung. Cuvintele vor să zboare!" }
     ]
   },
   {
-    category: "🎨 Sănătate Mentală",
+    category: "Sănătate Mentală",
     question: "Ai un hobby/pasiune care îți aduce bucurie?",
     options: [
-      { text: "Da, și investesc timp în el regulat 🎨", points: 3, comment: "Sufletul tău are combustibil! Minunat!" },
+      { text: "Da, și investesc timp în el regulat", points: 3, comment: "Sufletul tău are combustibil! Minunat!" },
       { text: "Am mai multe mici pasiuni", points: 3, comment: "Diversitate de bucurii! Ești o floare cu multe petale!" },
       { text: "Am avut, dar am abandonat", points: 1, comment: "Reînvie-le, scumpule! Pasiunile nu mor, doar dormitează!" },
       { text: "Pasiuni? Când să am timp?", points: 0, comment: "Timp se face, nu se găsește! 15 minute pe zi = o pasiune!" }
     ]
   },
   {
-    category: "🌅 Sănătate Mentală",
+    category: "Sănătate Mentală",
     question: "Cum începi dimineața?",
     options: [
-      { text: "Cu o rutină: stretching, apă, respirație 🌅", points: 3, comment: "Scumpule, ești un manual de self-care! Aplaudă cineva!" },
+      { text: "Cu o rutină: stretching, apă, respirație", points: 3, comment: "Scumpule, ești un manual de self-care! Aplaudă cineva!" },
       { text: "Liniștit, fără grabă", points: 2, comment: "Liniștea de dimineață e aurul zilei! Continuă!" },
-      { text: "În grabă, cu stres ⏰", points: 1, comment: "Trezește-te cu 15 minute mai devreme! Transformă totul!" },
-      { text: "Verific telefonul imediat 📱", points: 0, comment: "Ouch! Creierul tău începe ziua în haos. Schimbă rutina!" }
+      { text: "În grabă, cu stres", points: 1, comment: "Trezește-te cu 15 minute mai devreme! Transformă totul!" },
+      { text: "Verific telefonul imediat", points: 0, comment: "Ouch! Creierul tău începe ziua în haos. Schimbă rutina!" }
     ]
   },
 
   // === ÎNGRIJIRE PERSONALĂ & FRUMUSEȚE (10) ===
   {
-    category: "✨ Îngrijire",
+    category: "Îngrijire",
     question: "Ai o rutină de îngrijire a tenului?",
     options: [
-      { text: "Da! Curăț, hidratez, SPF — tot arsenalul ✨", points: 3, comment: "Strălucești ca mierea în soare! Pielea ta e fericită!" },
+      { text: "Da! Curăț, hidratez, SPF — tot arsenalul", points: 3, comment: "Strălucești ca mierea în soare! Pielea ta e fericită!" },
       { text: "Cremă hidratantă și atât", points: 2, comment: "Bun început! Adaugă SPF-ul și ai învins jocul!" },
       { text: "Apă și săpun, gata", points: 1, comment: "Hmm... pielea ta merită mai mult! E cel mai mare organ!" },
       { text: "Aproape deloc — folosesc doar apă și săpun când îmi amintesc", points: 0, comment: "Pielea ta merită mai multă atenție. Un minim de curățare, hidratare și SPF poate schimba mult." }
     ]
   },
   {
-    category: "☀️ Îngrijire",
+    category: "Îngrijire",
     question: "Folosești SPF (protecție solară)?",
     options: [
-      { text: "Zilnic, chiar și iarna ☀️", points: 3, comment: "Viitorul tău de la 60 de ani îți trimite mulțumiri acum!" },
+      { text: "Zilnic, chiar și iarna", points: 3, comment: "Viitorul tău de la 60 de ani îți trimite mulțumiri acum!" },
       { text: "Doar vara/la plajă", points: 2, comment: "Ok, dar soarele e activ și iarna! SPF zilnic = rege!" },
       { text: "Când îmi amintesc, rar", points: 1, comment: "Ridurile te văd și se freacă pe mâini... Fugi de ele!" },
-      { text: "SPF? Nu sunt în Caraibe 🏖️", points: 0, comment: "Soarele nu știe că ești în București! UV e UV oriunde!" }
+      { text: "SPF? Nu sunt în Caraibe", points: 0, comment: "Soarele nu știe că ești în București! UV e UV oriunde!" }
     ]
   },
   {
-    category: "🦷 Îngrijire",
+    category: "Îngrijire",
     question: "Cât de des mergi la medic pentru control?",
     options: [
-      { text: "O dată pe an, ca ceasul 🕐", points: 3, comment: "Perfect! Prevenția e miere curată pentru sănătate!" },
+      { text: "O dată pe an, ca ceasul", points: 3, comment: "Perfect! Prevenția e miere curată pentru sănătate!" },
       { text: "O dată la 2 ani, cam așa", points: 2, comment: "Nu-i rău, dar mai des = mai bine, scumpule!" },
       { text: "Doar când mă doare ceva", points: 1, comment: "Ups! Prevenția e mai ieftină decât tratamentul!" },
       { text: "Ultimul control? Nu îmi mai amintesc...", points: 0, comment: "Bzzz de alarmă! Programează-te ASAP, te rog!" }
     ]
   },
   {
-    category: "🪥 Îngrijire",
+    category: "Îngrijire",
     question: "Cum e igiena ta orală?",
     options: [
-      { text: "2x pe zi + ață dentară + apă de gură ✨", points: 3, comment: "Dinții tăi strălucesc ca diamantele! Dentistul te iubește!" },
+      { text: "2x pe zi + ață dentară + apă de gură", points: 3, comment: "Dinții tăi strălucesc ca diamantele! Dentistul te iubește!" },
       { text: "2x pe zi, fără ață dentară", points: 2, comment: "Bună rutină! Adaugă ața dentară — schimbă viața!" },
       { text: "O dată pe zi, grabă", points: 1, comment: "Ups! Dinții tăi înoată în bacterii. Mai zici o tură?" },
-      { text: "Variat... uit uneori 🙈", points: 0, comment: "Scumpule, dinții tăi plâng! Dentistul va plânge și el, apoi tu!" }
+      { text: "Variat... uit uneori", points: 0, comment: "Scumpule, dinții tăi plâng! Dentistul va plânge și el, apoi tu!" }
     ]
   },
   {
-    category: "💆 Îngrijire",
+    category: "Îngrijire",
     question: "Ai grijă de sănătatea părului?",
     options: [
-      { text: "Da, mască, ulei, tratamente regulate 💇", points: 3, comment: "Părul tău e o catedrală! Sper să am și eu blana așa!" },
+      { text: "Da, mască, ulei, tratamente regulate", points: 3, comment: "Părul tău e o catedrală! Sper să am și eu blana așa!" },
       { text: "Șampon + balsam, atent la produse", points: 2, comment: "Ok! Poate ocazional o mască să dezmierde vârfurile?" },
       { text: "Șampon și atât", points: 1, comment: "Părul tău are sete de iubire! Adaugă un balsam, măcar!" },
       { text: "2 în 1 și să mă uit la TikTok", points: 0, comment: "Oh dragă... 2 în 1 = 0 în 0. Separă-le, te rog!" }
     ]
   },
   {
-    category: "💄 Îngrijire",
+    category: "Îngrijire",
     question: "Te demachiezi seara, atunci când porți machiaj?",
     options: [
-      { text: "Mereu, religios 🧴", points: 3, comment: "Sfânt al pielii! Porii tăi dansează de bucurie!" },
+      { text: "Mereu, religios", points: 3, comment: "Sfânt al pielii! Porii tăi dansează de bucurie!" },
       { text: "Aproape mereu, uit rar", points: 2, comment: "Foarte bine! Mai ai puțin până la perfecțiune!" },
-      { text: "Uit destul de des 😴", points: 1, comment: "Ups! Machiajul peste noapte = coșuri garantate!" },
+      { text: "Uit destul de des", points: 1, comment: "Ups! Machiajul peste noapte = coșuri garantate!" },
       { text: "Nu port machiaj sau foarte rar", points: 2, comment: "Perfect în regulă. Chiar și fără machiaj, curățarea blândă a tenului rămâne importantă." }
     ]
   },
   {
-    category: "🛁 Îngrijire",
+    category: "Îngrijire",
     question: "Îți acorzi momente de self-care (baie, mască, etc)?",
     options: [
-      { text: "Da, săptămânal — e sfânt 🛀", points: 3, comment: "Self-care = self-love! Ești un prinț/o prințesă!" },
+      { text: "Da, săptămânal — e sfânt", points: 3, comment: "Self-care = self-love! Ești un prinț/o prințesă!" },
       { text: "Ocazional, când am chef", points: 2, comment: "Bună! Fă-ți asta mai frecvent — meriți!" },
       { text: "Rar, nu am timp", points: 1, comment: "Time e ce faci din el! O baie = 30 min spa gratuit!" },
       { text: "Self-care e pierdere de vreme", points: 0, comment: "Oh, dragă... e INVESTIȚIE, nu pierdere! Încearcă o dată!" }
     ]
   },
   {
-    category: "💅 Îngrijire",
+    category: "Îngrijire",
     question: "Ai grijă de unghii (mâini și picioare)?",
     options: [
-      { text: "Da, rutină completă cu ulei cuticular 💅", points: 3, comment: "Perfecțiune! Mâinile tale sunt o carte de vizită!" },
+      { text: "Da, rutină completă cu ulei cuticular", points: 3, comment: "Perfecțiune! Mâinile tale sunt o carte de vizită!" },
       { text: "Manichiură/pedichiură regulat", points: 3, comment: "Super! Îngrijirea lor e un pic de self-love!" },
       { text: "Le tai când sunt prea lungi", points: 1, comment: "Hmm... basic! Încearcă măcar un ulei — magie pură!" },
-      { text: "Unghiile cresc, atât ✂️", points: 0, comment: "Oh scumpule! Un mic ritual lunar schimbă totul!" }
+      { text: "Unghiile cresc, atât", points: 0, comment: "Oh scumpule! Un mic ritual lunar schimbă totul!" }
     ]
   },
   {
-    category: "👁️ Îngrijire",
+    category: "Îngrijire",
     question: "Mergi la controale la ochi?",
     options: [
-      { text: "Anual, fără excepție 👓", points: 3, comment: "Ochii tăi sunt ca diamantele — verificate regulat!" },
+      { text: "Anual, fără excepție", points: 3, comment: "Ochii tăi sunt ca diamantele — verificate regulat!" },
       { text: "La fiecare 2-3 ani", points: 2, comment: "Ok, dar anual e ideal — vederea se schimbă insidios!" },
       { text: "Doar când văd neclar", points: 1, comment: "Prea târziu! Ochii au nevoie de monitorizare, nu doar reparație!" },
-      { text: "N-am fost niciodată 🙈", points: 0, comment: "Scumpule! Chiar dacă vezi bine, control = obligatoriu!" }
+      { text: "N-am fost niciodată", points: 0, comment: "Scumpule! Chiar dacă vezi bine, control = obligatoriu!" }
     ]
   },
   {
-    category: "🚿 Îngrijire",
+    category: "Îngrijire",
     question: "Folosești produse cu ingrediente naturale?",
     options: [
-      { text: "Da, citesc fiecare etichetă 🌿", points: 3, comment: "Ești un Sherlock al etichetelor! Pielea ta e Pure Queen!" },
+      { text: "Da, citesc fiecare etichetă", points: 3, comment: "Ești un Sherlock al etichetelor! Pielea ta e Pure Queen!" },
       { text: "Da, dar nu extremist", points: 2, comment: "Echilibrat! Nu toate chimicalele sunt rele, nu toate naturalele sunt bune!" },
       { text: "Mai puțin... iau ce e în ofertă", points: 1, comment: "Oferta e prietena ta, dar și parabenii. Verifică etichetele!" },
       { text: "Mă spăl cu ce e la îndemână", points: 0, comment: "Hai să începem cu lucruri mici! Spring Farma are produse bune!" }
@@ -1804,7 +1804,7 @@ const allQuestions = [
 
 allQuestions.push(
   {
-    category: "🪒 Îngrijire",
+    category: "Îngrijire",
     genderTargets: ["male"],
     question: "Dacă te bărbierești, cum ai grijă de piele după ras?",
     options: [
@@ -1815,7 +1815,7 @@ allQuestions.push(
     ]
   },
   {
-    category: "💄 Îngrijire",
+    category: "Îngrijire",
     genderTargets: ["female"],
     question: "Cât de atentă ești la curățarea tenului după machiaj?",
     options: [
@@ -2029,7 +2029,7 @@ function loadQuestion() {
 
   document.getElementById('zzzumzi-reaction').classList.remove('show');
   document.getElementById('next-btn-wrap').classList.remove('show');
-  document.getElementById('next-btn').textContent = 'Următoarea →';
+  document.getElementById('next-btn').textContent = 'Următoarea ';
 }
 
 function selectOption(idx) {
@@ -2065,7 +2065,7 @@ function selectOption(idx) {
 
   document.getElementById('next-btn-wrap').classList.add('show');
   if (currentQuestion === quizQuestions.length - 1) {
-    document.getElementById('next-btn').textContent = 'Vezi rezultatul ✨';
+    document.getElementById('next-btn').textContent = 'Vezi rezultatul ';
   }
 }
 
@@ -2111,7 +2111,7 @@ function showResult() {
   document.getElementById('screen-result').classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  const diagnosis = diagnoses.find(d => score >= d.min && score <= d.max);
+  const diagnosis = diagnoses.find(d => score >= d.min && score<= d.max);
   const personalizedText = buildPersonalizedResult(diagnosis, profile);
 
   const scoreEl = document.getElementById('final-score');
