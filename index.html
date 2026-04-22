@@ -744,6 +744,105 @@
   .cta-box .btn:hover { color: var(--purple-800); background: linear-gradient(135deg, #ffffff 0%, #f8f2ff 100%); }
 
   /* ============================================
+     SHARE BLOCK — downloadable social cards
+     ============================================ */
+  .share-block {
+    margin-top: 20px;
+    padding: 20px 18px;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FAF5FF 100%);
+    border: 1px solid rgba(168, 85, 201, 0.18);
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 10px 30px -14px rgba(107, 33, 168, 0.2);
+  }
+  .share-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 17px;
+    color: var(--purple-900);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .share-subtitle {
+    font-size: 12.5px;
+    color: var(--purple-800);
+    font-weight: 600;
+    opacity: 0.78;
+    margin-bottom: 14px;
+    line-height: 1.45;
+  }
+  .share-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .share-btn {
+    appearance: none;
+    border: 1px solid rgba(107, 33, 168, 0.18);
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F2FF 100%);
+    border-radius: 16px;
+    padding: 12px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    font-family: inherit;
+    color: var(--purple-900);
+    box-shadow: 0 4px 12px -4px rgba(107, 33, 168, 0.12);
+    text-align: left;
+  }
+  .share-btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(107, 33, 168, 0.4);
+    box-shadow: 0 10px 22px -6px rgba(107, 33, 168, 0.25);
+  }
+  .share-btn:active { transform: translateY(0); }
+  .share-btn[disabled] { opacity: 0.55; cursor: wait; transform: none; }
+
+  .share-btn-icon {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--grad-primary);
+    border-radius: 10px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .share-icon-frame {
+    display: block;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 3px;
+  }
+  .share-icon-story { width: 12px; height: 20px; }
+  .share-icon-square { width: 18px; height: 18px; }
+
+  .share-btn-label {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+  .share-btn-main {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 13.5px;
+    color: var(--purple-900);
+    letter-spacing: -0.005em;
+  }
+  .share-btn-sub {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--purple-700);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 2px;
+    opacity: 0.75;
+  }
+
+  /* ============================================
      PRODUCT GIFT CARD — the "reward" moment
      ============================================ */
   .product-gift-card {
@@ -1092,6 +1191,13 @@
     .gift-product-description { font-size: 12.5px; }
     .gift-product-code { font-size: 24px; }
     .gift-product-button { font-size: 14px; padding: 13px 18px; }
+
+    .share-block { padding: 18px 14px; border-radius: 20px; }
+    .share-buttons { gap: 8px; }
+    .share-btn { padding: 11px 9px; gap: 9px; }
+    .share-btn-icon { width: 30px; height: 30px; border-radius: 9px; }
+    .share-btn-main { font-size: 12.5px; }
+    .share-btn-sub { font-size: 10px; }
   }
 </style>
 </head>
@@ -1135,7 +1241,7 @@
         </div>
         <div class="feature">
           <div class="feature-icon">🍯</div>
-          <div class="feature-text">Premiu la final</div>
+          <div class="feature-text">Borcane la final</div>
         </div>
       </div>
 
@@ -1262,6 +1368,31 @@
       </div>
 
       <button class="btn btn-outline" onclick="restartQuiz()">Mai încearcă o dată</button>
+
+      <div class="share-block">
+        <div class="share-title">Împărtășește rezultatul</div>
+        <div class="share-subtitle">Salvează o imagine și postează-o pe Instagram sau Facebook</div>
+        <div class="share-buttons">
+          <button class="share-btn" onclick="downloadShareImage('story', event)">
+            <span class="share-btn-icon" aria-hidden="true">
+              <span class="share-icon-frame share-icon-story"></span>
+            </span>
+            <span class="share-btn-label">
+              <span class="share-btn-main">Descarcă Story</span>
+              <span class="share-btn-sub">9 : 16</span>
+            </span>
+          </button>
+          <button class="share-btn" onclick="downloadShareImage('square', event)">
+            <span class="share-btn-icon" aria-hidden="true">
+              <span class="share-icon-frame share-icon-square"></span>
+            </span>
+            <span class="share-btn-label">
+              <span class="share-btn-main">Descarcă Post</span>
+              <span class="share-btn-sub">1 : 1</span>
+            </span>
+          </button>
+        </div>
+      </div>
 
       <div class="footer-brand">
         Cu drag, <strong>Zzzumzi</strong> de la <strong>Spring Farma</strong>
@@ -1836,7 +1967,7 @@ const diagnoses = [
   {
     min: 25, max: 30,
     emoji: "👑",
-    title: "Regina fără stres",
+    title: "Regina Zen a Stupului",
     text: "Tu ești albina aia care nu se stresează nici când vine furtuna. Echilibrată, radiantă și în control.",
     product: {
       name: "Collanova, 10 flacoane buvabile, Benesio",
@@ -1849,7 +1980,7 @@ const diagnoses = [
   {
     min: 20, max: 24,
     emoji: "⚡",
-    title: "Workaholica Stupului",
+    title: "Albinuța Turbo",
     text: "Mergi pe baterii invizibile... dar parcă încep să se descarce. Ai energie, dar corpul tău cere puțin ajutor.",
     product: {
       name: "Tonico Forte 10 ml, tonic pentru organism, 10 flacoane, Benesio",
@@ -1862,8 +1993,8 @@ const diagnoses = [
   {
     min: 15, max: 19,
     emoji: "🌻",
-    title: "Balonată, dar optimistă",
-    text: "Mănânci cu poftă… și după negociezi cu stomacul.",
+    title: "Bobocelul Curajos",
+    text: "Ești la început, dar ai vibe bun. Cu puțin ajutor și consecvență, înflorești rapid.",
     product: {
       name: "Efi-Digest, 20 comprimate, Naturalis",
       description: "Un ajutor bun pentru confort digestiv și pentru zilele în care mesele n-au fost tocmai prietenoase.",
@@ -1875,7 +2006,7 @@ const diagnoses = [
   {
     min: 10, max: 14,
     emoji: "😵‍💫",
-    title: "Albina zăpăcită",
+    title: "Albina Puțin Zăpăcită",
     text: "Ai deschis 5 task-uri, ai uitat 3 și te-ai stresat pentru toate. Corpul tău îți cere puțină liniște.",
     product: {
       name: "Bisglicinat de magneziu, 30 comprimate, Naturalis",
@@ -1888,7 +2019,7 @@ const diagnoses = [
   {
     min: 0, max: 9,
     emoji: "🚨",
-    title: "Albina în mod avion",
+    title: "Albina în Criză de Nectar",
     text: "Nivelul de energie: pe minus. Corpul tău cere ajutor, nu cafea. E momentul pentru un reset blând, dar serios.",
     product: {
       name: "Hepafort, 30 capsule, Benesio",
@@ -2142,6 +2273,308 @@ function restartQuiz() {
   document.getElementById('screen-intro').classList.add('active');
   document.getElementById('zzzumzi-reaction').classList.remove('show');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================
+// SHARE IMAGE GENERATOR
+// ============================================
+let _beeImageCache = null;
+function loadBeeImage() {
+  if (_beeImageCache) return Promise.resolve(_beeImageCache);
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => { _beeImageCache = img; resolve(img); };
+    img.onerror = reject;
+    img.src = 'images/zzzumzi.png';
+  });
+}
+
+function wrapLines(ctx, text, maxWidth) {
+  const words = text.split(/\s+/);
+  const lines = [];
+  let current = '';
+  for (const w of words) {
+    const test = current ? current + ' ' + w : w;
+    if (ctx.measureText(test).width > maxWidth && current) {
+      lines.push(current);
+      current = w;
+    } else {
+      current = test;
+    }
+  }
+  if (current) lines.push(current);
+  return lines;
+}
+
+function drawRoundedRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+async function renderShareImage(format) {
+  // Dimensions — Instagram-ready
+  const W = 1080;
+  const H = format === 'story' ? 1920 : 1080;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // Ensure fonts are loaded before drawing text
+  if (document.fonts && document.fonts.ready) {
+    try { await document.fonts.ready; } catch (e) {}
+  }
+
+  // Background — deep purple gradient with radial accents
+  const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+  bgGrad.addColorStop(0, '#3B0764');
+  bgGrad.addColorStop(0.55, '#6B21A8');
+  bgGrad.addColorStop(1, '#4C1D8A');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Soft radial glow top-left (purple-pink)
+  const glow1 = ctx.createRadialGradient(W * 0.2, H * 0.15, 0, W * 0.2, H * 0.15, W * 0.7);
+  glow1.addColorStop(0, 'rgba(168, 85, 201, 0.55)');
+  glow1.addColorStop(1, 'rgba(168, 85, 201, 0)');
+  ctx.fillStyle = glow1;
+  ctx.fillRect(0, 0, W, H);
+
+  // Soft radial glow bottom-right (yellow warm)
+  const glow2 = ctx.createRadialGradient(W * 0.85, H * 0.85, 0, W * 0.85, H * 0.85, W * 0.7);
+  glow2.addColorStop(0, 'rgba(255, 217, 61, 0.22)');
+  glow2.addColorStop(1, 'rgba(255, 217, 61, 0)');
+  ctx.fillStyle = glow2;
+  ctx.fillRect(0, 0, W, H);
+
+  // Subtle dot-grid texture
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+  const dotStep = 40;
+  for (let y = 0; y < H; y += dotStep) {
+    for (let x = 0; x < W; x += dotStep) {
+      ctx.fillRect(x, y, 2, 2);
+    }
+  }
+
+  // Get diagnosis data — use BASE diagnosis text (shorter, more impactful for social)
+  const diagnosis = diagnoses.find(d => score >= d.min && score <= d.max);
+  const title = diagnosis.title;
+  const description = diagnosis.text;
+  const emojiChar = diagnosis.emoji;
+  const pct = Math.round((score / 30) * 100);
+
+  // ---- LAYOUT ----
+  const isStory = format === 'story';
+
+  // Top label
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillStyle = 'rgba(255, 217, 61, 0.9)';
+  ctx.font = '800 ' + (isStory ? 32 : 28) + 'px Nunito, sans-serif';
+  const topLabelY = isStory ? 180 : 100;
+  ctx.fillText('QUIZ ZZZUMZI × SPRING FARMA', W / 2, topLabelY);
+
+  // Bee image — load it
+  let bee;
+  try { bee = await loadBeeImage(); } catch (e) { bee = null; }
+
+  const beeSize = isStory ? 420 : 210;
+  const beeY = isStory ? 260 : 120;
+  if (bee) {
+    const aspect = bee.width / bee.height;
+    const beeW = beeSize * aspect;
+    const beeH = beeSize;
+    // Drop shadow
+    ctx.save();
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+    ctx.shadowBlur = 40;
+    ctx.shadowOffsetY = 20;
+    ctx.drawImage(bee, (W - beeW) / 2, beeY, beeW, beeH);
+    ctx.restore();
+  }
+
+  // Emoji (overlap bottom-right of bee, like the result screen)
+  const emojiSize = isStory ? 130 : 70;
+  const emojiY = beeY + beeSize - (isStory ? 50 : 22);
+  ctx.font = emojiSize + 'px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillStyle = '#fff';
+  ctx.save();
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+  ctx.shadowBlur = 20;
+  ctx.fillText(emojiChar, W / 2, emojiY);
+  ctx.restore();
+
+  // Character title — Fraunces bold 900
+  let cursorY = isStory ? 820 : 400;
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = '900 ' + (isStory ? 84 : 58) + 'px Fraunces, serif';
+  // Multi-line title support (if long)
+  const titleLines = wrapLines(ctx, title, W - 160);
+  for (const line of titleLines) {
+    ctx.fillText(line, W / 2, cursorY);
+    cursorY += (isStory ? 96 : 66);
+  }
+
+  // Golden accent underline
+  const underlineY = cursorY - (isStory ? 60 : 38);
+  const underlineW = isStory ? 140 : 90;
+  const underlineGrad = ctx.createLinearGradient(W / 2 - underlineW, underlineY, W / 2 + underlineW, underlineY);
+  underlineGrad.addColorStop(0, 'rgba(255, 217, 61, 0)');
+  underlineGrad.addColorStop(0.5, 'rgba(255, 217, 61, 1)');
+  underlineGrad.addColorStop(1, 'rgba(255, 217, 61, 0)');
+  ctx.fillStyle = underlineGrad;
+  ctx.fillRect(W / 2 - underlineW, cursorY + (isStory ? 18 : 10), underlineW * 2, isStory ? 5 : 4);
+  cursorY += (isStory ? 70 : 44);
+
+  // Description — wrap text
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.88)';
+  ctx.font = '600 ' + (isStory ? 36 : 26) + 'px Nunito, sans-serif';
+  const descMaxWidth = W - (isStory ? 180 : 140);
+  const descLines = wrapLines(ctx, description, descMaxWidth);
+  const descLineH = isStory ? 50 : 36;
+  // Limit to 4 lines (story) / 3 lines (post) to keep layout clean
+  const maxDescLines = isStory ? 4 : 3;
+  const shownDesc = descLines.slice(0, maxDescLines);
+  if (descLines.length > maxDescLines) {
+    shownDesc[maxDescLines - 1] = shownDesc[maxDescLines - 1].replace(/[\s,.;:]*$/, '') + '…';
+  }
+  for (const line of shownDesc) {
+    ctx.fillText(line, W / 2, cursorY);
+    cursorY += descLineH;
+  }
+  cursorY += (isStory ? 60 : 28);
+
+  // Score panel — big gradient number with /30 + percent
+  const panelH = isStory ? 280 : 180;
+  const panelW = isStory ? 720 : 560;
+  const panelX = (W - panelW) / 2;
+  const panelY = cursorY;
+
+  // Panel background — glassmorphism card
+  drawRoundedRect(ctx, panelX, panelY, panelW, panelH, isStory ? 32 : 28);
+  ctx.save();
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 217, 61, 0.5)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore();
+
+  // Score label (top of panel)
+  ctx.font = '800 ' + (isStory ? 24 : 18) + 'px Nunito, sans-serif';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+  ctx.textAlign = 'center';
+  ctx.fillText('PUNCTAJUL TĂU', W / 2, panelY + (isStory ? 52 : 36));
+
+  // Big score with gradient
+  const scoreStr = String(score);
+  const slashStr = '/30';
+  ctx.font = '900 ' + (isStory ? 150 : 90) + 'px Fraunces, serif';
+  const scoreW = ctx.measureText(scoreStr).width;
+  ctx.font = '700 ' + (isStory ? 60 : 38) + 'px Fraunces, serif';
+  const slashW = ctx.measureText(slashStr).width;
+  const totalW = scoreW + slashW + (isStory ? 14 : 8);
+  const scoreStartX = (W - totalW) / 2;
+  const scoreY = panelY + (isStory ? 180 : 116);
+
+  // Gradient for score digits
+  const scoreGrad = ctx.createLinearGradient(0, scoreY - (isStory ? 120 : 75), 0, scoreY);
+  scoreGrad.addColorStop(0, '#FFD93D');
+  scoreGrad.addColorStop(1, '#FFB800');
+  ctx.fillStyle = scoreGrad;
+  ctx.font = '900 ' + (isStory ? 150 : 90) + 'px Fraunces, serif';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText(scoreStr, scoreStartX, scoreY);
+
+  // /30 in white, slightly smaller
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+  ctx.font = '700 ' + (isStory ? 60 : 38) + 'px Fraunces, serif';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText(slashStr, scoreStartX + scoreW + (isStory ? 14 : 8), scoreY);
+
+  // Percent pill — below the score
+  const pctStr = pct + '%';
+  ctx.font = '900 ' + (isStory ? 32 : 22) + 'px Nunito, sans-serif';
+  const pctTextW = ctx.measureText(pctStr).width;
+  const pctPadX = isStory ? 26 : 18;
+  const pctPadY = isStory ? 10 : 7;
+  const pctH = (isStory ? 32 : 22) + pctPadY * 2;
+  const pctW = pctTextW + pctPadX * 2;
+  const pctX = (W - pctW) / 2;
+  const pctY = panelY + panelH - pctH - (isStory ? 24 : 16);
+
+  drawRoundedRect(ctx, pctX, pctY, pctW, pctH, pctH / 2);
+  const pctGrad = ctx.createLinearGradient(pctX, pctY, pctX, pctY + pctH);
+  pctGrad.addColorStop(0, '#FFD93D');
+  pctGrad.addColorStop(1, '#FFB800');
+  ctx.fillStyle = pctGrad;
+  ctx.fill();
+  ctx.fillStyle = '#3B0764';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(pctStr, W / 2, pctY + pctH / 2 + 1);
+
+  cursorY = panelY + panelH;
+
+  // Brand footer
+  ctx.textBaseline = 'alphabetic';
+  ctx.textAlign = 'center';
+  const footerY = H - (isStory ? 120 : 54);
+  ctx.font = '700 ' + (isStory ? 26 : 18) + 'px Nunito, sans-serif';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+  ctx.fillText('Fă quiz-ul pe zzzumzi.ro', W / 2, footerY - (isStory ? 36 : 24));
+
+  ctx.font = '900 ' + (isStory ? 34 : 22) + 'px Fraunces, serif';
+  const brandGrad = ctx.createLinearGradient(0, footerY - 30, 0, footerY);
+  brandGrad.addColorStop(0, '#FFFFFF');
+  brandGrad.addColorStop(1, '#FFD93D');
+  ctx.fillStyle = brandGrad;
+  ctx.fillText('Zzzumzi × Spring Farma', W / 2, footerY);
+
+  return canvas;
+}
+
+async function downloadShareImage(format, evt) {
+  const clicked = evt && evt.currentTarget;
+  if (clicked) { clicked.disabled = true; clicked.querySelector('.share-btn-main').textContent = 'Se generează...'; }
+  try {
+    const canvas = await renderShareImage(format);
+    const dataUrl = canvas.toDataURL('image/png', 0.95);
+    const diagnosis = diagnoses.find(d => score >= d.min && score <= d.max);
+    const safeTitle = (diagnosis.title || 'rezultat').toLowerCase().replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '');
+    const filename = 'zzzumzi-' + safeTitle + '-' + format + '.png';
+
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } catch (err) {
+    console.error('Share image generation failed:', err);
+    alert('Nu am putut genera imaginea. Încearcă din nou.');
+  } finally {
+    if (clicked) {
+      clicked.disabled = false;
+      const main = clicked.querySelector('.share-btn-main');
+      if (main) main.textContent = format === 'story' ? 'Descarcă Story' : 'Descarcă Post';
+    }
+  }
 }
 </script>
 
