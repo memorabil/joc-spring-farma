@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zzzumzi Quiz - Cât de sănătos ești? | Spring Farma</title>
+<meta name="description" content="Quiz amuzant cu albinuța Zzzumzi de la Spring Farma. Află cât de sănătos ești în doar 2 minute!">
+<link rel="icon" href="images/zzzumzi.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    /* Primary purple palette */
+    --purple-900: #3B0764;
+    --purple-800: #4C1D8A;
+    --purple-700: #6B21A8;
+    --purple-600: #7B2D8E;
+    --purple-500: #9333EA;
+    --purple-400: #A855C9;
+    --purple-300: #C084DB;
+    --purple-200: #E9D5F0;
+    --purple-100: #F3E8FF;
+    --purple-50: #FAF5FF;
+
+    /* Green accents */
+    --green: #5FB947;
+    --green-dark: #3A8B2A;
+    --green-light: #D4EFC8;
+
+    /* Yellow accent (minimal) */
+    --yellow: #FFD93D;
+
+    /* Neutrals */
+    --white: #FFFFFF;
+    --black: #1A0B2E;
+
+    /* Gradients */
+    --grad-primary: linear-gradient(135deg, #6B21A8 0%, #A855C9 100%);
+    --grad-primary-hover: linear-gradient(135deg, #7B2D8E 0%, #C084DB 100%);
+    --grad-deep: linear-gradient(135deg, #3B0764 0%, #6B21A8 50%, #9333EA 100%);
+    --grad-soft: linear-gradient(135deg, #F3E8FF 0%, #FAF5FF 100%);
+    --grad-green: linear-gradient(135deg, #3A8B2A 0%, #5FB947 100%);
+  }
+
+  html, body {
+    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    background: var(--purple-50);
+    overflow-x: hidden;
+    color: var(--black);
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 15% 15%, rgba(168, 85, 201, 0.25) 0%, transparent 45%),
+      radial-gradient(circle at 85% 85%, rgba(95, 185, 71, 0.15) 0%, transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(107, 33, 168, 0.08) 0%, transparent 70%),
+      linear-gradient(180deg, #FAF5FF 0%, #F3E8FF 100%);
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 2px 2px, rgba(107, 33, 168, 0.04) 1px, transparent 0);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 16px 100px;
+    min-height: 100vh;
+  }
+
+  /* Floating gradient blobs */
+  .floating-deco {
+    position: fixed;
+    animation: float 10s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+  }
+  .deco-blob {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    filter: blur(40px);
+  }
+  .deco-blob.b1 {
+    top: 10%; left: -80px;
+    background: radial-gradient(circle, var(--purple-400), transparent);
+    animation-delay: 0s;
+  }
+  .deco-blob.b2 {
+    top: 60%; right: -80px;
+    background: radial-gradient(circle, var(--green), transparent);
+    animation-delay: 3s;
+    opacity: 0.25;
+  }
+  .deco-blob.b3 {
+    bottom: 10%; left: 20%;
+    background: radial-gradient(circle, var(--purple-300), transparent);
+    animation-delay: 6s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(30px, -20px); }
+    66% { transform: translate(-20px, 30px); }
+  }
+
+  /* BRAND HEADER */
+  .brand-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0 20px;
+  }
+  .brand-bar img {
+    height: 42px;
+    width: auto;
+    filter: drop-shadow(0 2px 12px rgba(107, 33, 168, 0.15));
+  }
+
+  /* CARDS - Glassmorphism */
+  .card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 36px 28px;
+    box-shadow:
+      0 20px 60px rgba(107, 33, 168, 0.15),
+      0 0 0 1px rgba(168, 85, 201, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+  }
+
+  .screen { display: none; animation: fadeInUp 0.5s ease-out; }
+  .screen.active { display: block; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* INTRO */
+  .bee-mascot {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 16px;
+    position: relative;
+    animation: beeBounce 3s ease-in-out infinite;
+    display: block;
+  }
+  .bee-mascot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 16px 32px rgba(107, 33, 168, 0.3));
+  }
+
+  @keyframes beeBounce {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-15px) rotate(3deg); }
+  }
+
+  .intro-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(30px, 6.5vw, 44px);
+    text-align: center;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    color: var(--black);
+  }
+  .intro-title .z {
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+  }
+  .intro-title .highlight {
+    background: linear-gradient(180deg, transparent 55%, rgba(168, 85, 201, 0.3) 55%);
+    padding: 0 6px;
+    color: var(--purple-800);
+  }
+
+  .intro-subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: var(--purple-800);
+    margin-bottom: 28px;
+    font-weight: 600;
+    line-height: 1.5;
+    opacity: 0.85;
+  }
+
+  .intro-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .feature {
+    text-align: center;
+    padding: 14px 8px;
+    background: var(--grad-soft);
+    border-radius: 18px;
+    border: 1px solid rgba(168, 85, 201, 0.2);
+  }
+  .feature-icon { font-size: 24px; margin-bottom: 4px; }
+  .feature-text { font-size: 11px; font-weight: 800; color: var(--purple-800); text-transform: uppercase; letter-spacing: 0.03em; }
+
+
+  .profile-box {
+    margin: 0 0 28px;
+    padding: 20px;
+    border-radius: 24px;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(243,232,255,0.9) 100%);
+    border: 1px solid rgba(168, 85, 201, 0.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .profile-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--purple-900);
+    margin-bottom: 8px;
+  }
+  .profile-help {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--purple-800);
+    opacity: 0.88;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .field.full { grid-column: 1 / -1; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--purple-800);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .field select,
+  .field input {
+    width: 100%;
+    border-radius: 16px;
+    border: 2px solid rgba(168, 85, 201, 0.16);
+    background: rgba(255,255,255,0.92);
+    padding: 14px 16px;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .field select:focus,
+  .field input:focus {
+    border-color: var(--purple-500);
+    box-shadow: 0 0 0 4px rgba(168, 85, 201, 0.12);
+    transform: translateY(-1px);
+  }
+  .profile-error {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(255, 217, 61, 0.18);
+    color: var(--purple-900);
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .profile-error.show { display: block; }
+
+  /* BUTTONS - Gradient */
+  .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 18px 32px;
+    background: var(--grad-primary);
+    color: var(--white);
+    border: none;
+    border-radius: 100px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow:
+      0 10px 30px rgba(107, 33, 168, 0.35),
+      0 4px 12px rgba(107, 33, 168, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 14px 40px rgba(107, 33, 168, 0.45),
+      0 6px 16px rgba(107, 33, 168, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: var(--grad-primary-hover);
+    color: var(--white);
+  }
+  .btn:active { transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--purple-700);
+    border: 2px solid var(--purple-300);
+    box-shadow: none;
+    margin-top: 12px;
+  }
+  .btn-outline:hover {
+    background: var(--purple-100);
+    border-color: var(--purple-500);
+    box-shadow: 0 4px 12px rgba(107, 33, 168, 0.15);
+  }
+  .btn-outline::before { display: none; }
+
+  /* QUIZ HEADER */
+  .quiz-header { margin-bottom: 24px; }
+  .progress-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-label {
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--purple-800);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .honey-score {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--grad-primary);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 13px;
+    box-shadow: 0 4px 12px rgba(107, 33, 168, 0.3);
+  }
+  .progress-bar {
+    height: 10px;
+    background: var(--purple-100);
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--grad-primary);
+    border-radius: 100px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+    box-shadow: 0 0 20px rgba(168, 85, 201, 0.5);
+  }
+
+  .category-tag {
+    display: inline-block;
+    padding: 7px 16px;
+    background: var(--purple-100);
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--purple-700);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .question-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(22px, 4.5vw, 28px);
+    line-height: 1.3;
+    margin-bottom: 24px;
+    color: var(--black);
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .option {
+    padding: 16px 20px;
+    background: var(--white);
+    border: 2px solid var(--purple-100);
+    border-radius: 18px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+    transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease, color 0.22s ease;
+    font-family: inherit;
+    color: var(--black);
+    line-height: 1.4;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+  .option::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.12) 35%, rgba(255,255,255,0.42) 50%, rgba(255,255,255,0.12) 65%, transparent 100%);
+    transform: translateX(-125%);
+    opacity: 0;
+    transition: transform 0.55s ease, opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .option::after {
+    content: '✦';
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 14px;
+    opacity: 0;
+    transform: scale(0.4) rotate(-14deg);
+    transition: opacity 0.2s ease, transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+  .option:hover {
+    border-color: var(--purple-400);
+    background: var(--purple-50);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(107, 33, 168, 0.12);
+  }
+  .option:hover::before {
+    transform: translateX(125%);
+    opacity: 1;
+  }
+  .option:focus-visible {
+    border-color: var(--purple-500);
+    box-shadow: 0 0 0 4px rgba(168, 85, 201, 0.16);
+  }
+  .option.selected {
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 52%, #d946ef 100%);
+    border-color: transparent;
+    color: var(--white);
+    box-shadow: 0 10px 30px rgba(107, 33, 168, 0.38), 0 0 0 1px rgba(255,255,255,0.18) inset;
+    transform: translateY(-1px) scale(1.01);
+    animation: selectedPulse 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .option.selected::before {
+    transform: translateX(125%);
+    opacity: 0.9;
+  }
+  .option.selected::after {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  .option.selected:hover,
+  .option.selected:active,
+  .option.selected:focus-visible {
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 52%, #d946ef 100%);
+    border-color: transparent;
+    color: var(--white);
+    box-shadow: 0 12px 34px rgba(107, 33, 168, 0.42), 0 0 0 1px rgba(255,255,255,0.18) inset, 0 0 24px rgba(168, 85, 247, 0.26);
+    transform: translateY(-1px) scale(1.01);
+  }
+  .option.option-pop {
+    animation: selectedPulse 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes selectedPulse {
+    0% { transform: translateY(3px) scale(0.97); }
+    55% { transform: translateY(-2px) scale(1.02); }
+    100% { transform: translateY(-1px) scale(1.01); }
+  }
+
+  /* SPEECH BUBBLE - Zzzumzi reaction */
+  .zzzumzi-reaction {
+    position: fixed;
+    left: 28px;
+    bottom: -360px;
+    width: min(92vw, 760px);
+    display: flex;
+    align-items: flex-end;
+    gap: 18px;
+    z-index: 100;
+    transition: bottom 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+  .zzzumzi-reaction.show {
+    bottom: -38px;
+  }
+
+  .reaction-bee {
+    width: clamp(240px, 24vw, 320px);
+    height: clamp(240px, 24vw, 320px);
+    flex-shrink: 0;
+    animation: beeWiggle 1.2s ease-in-out infinite;
+    filter: drop-shadow(0 22px 46px rgba(107, 33, 168, 0.35));
+  }
+  @keyframes beeWiggle {
+    0%, 100% { transform: translateY(4px) rotate(-3deg); }
+    50% { transform: translateY(-4px) rotate(3deg); }
+  }
+  .reaction-bee img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .speech-bubble {
+    position: relative;
+    width: min(42vw, 360px);
+    min-width: 280px;
+    border-radius: 28px;
+    padding: 18px 22px;
+    margin-bottom: 132px;
+    box-shadow:
+      0 22px 50px rgba(59, 7, 100, 0.26),
+      inset 0 1px 0 rgba(255,255,255,0.75);
+    border: 1px solid rgba(255,255,255,0.28);
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.94) 0%, rgba(243,232,255,0.9) 46%, rgba(212,239,200,0.82) 100%);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    overflow: hidden;
+    animation: bubblePop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s backwards;
+  }
+  .speech-bubble::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(168,85,201,0.75), rgba(95,185,71,0.72));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    left: -11px;
+    bottom: 34px;
+    width: 22px;
+    height: 22px;
+    transform: rotate(45deg);
+    border-radius: 0 0 0 7px;
+    background: linear-gradient(135deg, rgba(243,232,255,0.95), rgba(212,239,200,0.88));
+    border-left: 1px solid rgba(168,85,201,0.35);
+    border-bottom: 1px solid rgba(95,185,71,0.35);
+  }
+  @keyframes bubblePop {
+    0% { transform: translateY(14px) scale(0.92); opacity: 0; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  .speech-text {
+    position: relative;
+    z-index: 1;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--black);
+    line-height: 1.5;
+  }
+  .speech-name {
+    position: relative;
+    z-index: 1;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 12px;
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .next-btn-wrap {
+    position: relative;
+    z-index: 140;
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease 0.4s;
+    pointer-events: none;
+  }
+  .next-btn-wrap.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* RESULT */
+  .result-hero {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .result-bee {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+    animation: badgePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .result-bee img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 30px rgba(107, 33, 168, 0.35));
+  }
+  .result-emoji {
+    font-size: 48px;
+    margin-top: -16px;
+    display: inline-block;
+    animation: badgePop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+  }
+
+  @keyframes badgePop {
+    0% { transform: scale(0) rotate(-180deg); }
+    100% { transform: scale(1) rotate(0); }
+  }
+
+  .score-display {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .score-number {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 76px;
+    line-height: 1;
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.04em;
+  }
+  .score-label {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    color: var(--purple-700);
+    font-weight: 700;
+    margin-left: 8px;
+  }
+  .score-subtitle {
+    font-size: 13px;
+    color: var(--purple-700);
+    font-weight: 700;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+
+  .diagnosis-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(26px, 5vw, 34px);
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    color: var(--black);
+  }
+
+  .diagnosis-text {
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--purple-800);
+    margin-bottom: 24px;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  .cta-box {
+    background: var(--grad-deep);
+    border-radius: 24px;
+    padding: 28px 24px;
+    margin-bottom: 16px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(168, 85, 201, 0.4), transparent);
+    border-radius: 50%;
+  }
+  .cta-box > * { position: relative; z-index: 1; }
+  .cta-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: white;
+  }
+  .cta-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 18px;
+    opacity: 0.95;
+    line-height: 1.5;
+  }
+  .cta-box .btn {
+    background: var(--white);
+    color: var(--purple-800);
+  }
+  .cta-box .btn:hover { color: var(--purple-800); background: linear-gradient(135deg, #ffffff 0%, #f8f2ff 100%); }
+
+  /* ============================================
+     PRODUCT GIFT CARD — the "reward" moment
+     ============================================ */
+  .product-gift-card {
+    position: relative;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(255, 217, 61, 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, rgba(168, 85, 201, 0.25) 0%, transparent 50%),
+      linear-gradient(135deg, #FFFDF5 0%, #FAF5FF 100%);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-radius: 28px;
+    padding: 24px 20px 22px;
+    margin: 8px 0 24px;
+    overflow: hidden;
+    box-shadow:
+      0 20px 50px -12px rgba(107, 33, 168, 0.28),
+      0 0 0 1px rgba(255, 217, 61, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    animation: giftReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+  }
+  .product-gift-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 28px;
+    padding: 2px;
+    background: linear-gradient(135deg, #FFD93D 0%, #A855C9 50%, #6B21A8 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .product-gift-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(115deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.55) 45%,
+      rgba(255, 217, 61, 0.35) 50%,
+      rgba(255, 255, 255, 0.55) 55%,
+      transparent 70%);
+    transform: translateX(-100%);
+    animation: giftShine 3.2s ease-in-out 1s infinite;
+    pointer-events: none;
+  }
+
+  @keyframes giftReveal {
+    0%   { opacity: 0; transform: scale(0.85) translateY(20px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes giftShine {
+    0%   { transform: translateX(-100%) rotate(0deg); }
+    60%  { transform: translateX(100%) rotate(0deg); }
+    100% { transform: translateX(100%) rotate(0deg); }
+  }
+
+  /* Floating sparkles — celebratory confetti feel */
+  .gift-sparkles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .gift-sparkles span {
+    position: absolute;
+    font-size: 16px;
+    opacity: 0;
+    animation: sparkleFloat 2.8s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(107, 33, 168, 0.25));
+  }
+  .gift-sparkles span:nth-child(1) { top: 10%;  left: 8%;   animation-delay: 0.2s; }
+  .gift-sparkles span:nth-child(2) { top: 18%;  right: 10%; animation-delay: 0.8s; font-size: 18px; }
+  .gift-sparkles span:nth-child(3) { top: 48%;  left: 4%;   animation-delay: 1.4s; font-size: 14px; }
+  .gift-sparkles span:nth-child(4) { bottom: 22%; right: 6%; animation-delay: 0.5s; }
+  .gift-sparkles span:nth-child(5) { bottom: 8%; left: 12%;  animation-delay: 1.8s; font-size: 15px; }
+  .gift-sparkles span:nth-child(6) { top: 38%;  right: 4%;  animation-delay: 2.2s; font-size: 13px; }
+
+  @keyframes sparkleFloat {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(0.7); }
+    30%      { opacity: 1; transform: translateY(-6px) scale(1.1); }
+    60%      { opacity: 0.85; transform: translateY(-12px) scale(1); }
+  }
+
+  .gift-badge {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    background: linear-gradient(135deg, #FFD93D 0%, #FFB800 100%);
+    color: var(--purple-900);
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 14px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+    box-shadow: 0 6px 16px -4px rgba(255, 184, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.02em;
+    animation: badgeBounce 2s ease-in-out 1.2s infinite;
+  }
+  @keyframes badgeBounce {
+    0%, 100%  { transform: translateY(0) rotate(-1deg); }
+    50%       { transform: translateY(-2px) rotate(1deg); }
+  }
+
+  .gift-intro {
+    position: relative;
+    z-index: 2;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--purple-800);
+    font-weight: 600;
+    margin-bottom: 16px;
+    opacity: 0.9;
+  }
+
+  .gift-product-wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 20px;
+    border: 1px solid rgba(168, 85, 201, 0.15);
+    backdrop-filter: blur(4px);
+    margin-bottom: 16px;
+  }
+
+  .gift-image-frame {
+    flex-shrink: 0;
+    width: 110px;
+    height: 110px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FAF5FF 100%);
+    padding: 6px;
+    box-shadow:
+      0 8px 20px -6px rgba(107, 33, 168, 0.25),
+      inset 0 0 0 2px rgba(255, 217, 61, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .gift-image-frame::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 21px;
+    background: conic-gradient(from 0deg, #FFD93D, #A855C9, #6B21A8, #5FB947, #FFD93D);
+    z-index: -1;
+    opacity: 0.35;
+    filter: blur(6px);
+  }
+  .gift-product-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.12));
+  }
+
+  .gift-product-content {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+  }
+  .gift-product-label {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--purple-700);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    opacity: 0.8;
+  }
+  .gift-product-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 1.2;
+    color: var(--purple-900);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .gift-product-description {
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--purple-800);
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  .gift-code-box {
+    position: relative;
+    z-index: 2;
+    background:
+      repeating-linear-gradient(45deg, transparent 0 10px, rgba(255, 217, 61, 0.08) 10px 20px),
+      linear-gradient(135deg, var(--purple-900) 0%, var(--purple-700) 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 14px 16px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 20px -6px rgba(59, 7, 100, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border: 1px dashed rgba(255, 217, 61, 0.4);
+  }
+  .gift-code-label {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.85;
+    margin-bottom: 6px;
+  }
+  .gift-product-code {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 28px;
+    line-height: 1;
+    background: linear-gradient(135deg, #FFD93D 0%, #FFFFFF 50%, #FFD93D 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 8px rgba(255, 217, 61, 0.3);
+  }
+  .gift-code-help {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+
+  .gift-product-button {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(135deg, #5FB947 0%, #3A8B2A 100%);
+    color: white;
+    text-decoration: none;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 15px;
+    padding: 15px 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 24px -6px rgba(58, 139, 42, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: 0.01em;
+  }
+  .gift-product-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -6px rgba(58, 139, 42, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .gift-product-button:active {
+    transform: translateY(0);
+  }
+
+  .footer-brand {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--purple-700);
+    font-weight: 600;
+    opacity: 0.7;
+  }
+  .footer-brand strong {
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+
+  @media (max-width: 768px) {
+    .zzzumzi-reaction {
+      left: 10px;
+      right: 10px;
+      width: auto;
+      gap: 10px;
+      bottom: -280px;
+    }
+    .zzzumzi-reaction.show {
+      bottom: 8px;
+    }
+    .reaction-bee {
+      width: 150px;
+      height: 150px;
+      flex-shrink: 0;
+      transform: translateY(16px);
+    }
+    .speech-bubble {
+      width: auto;
+      min-width: 0;
+      flex: 1;
+      padding: 14px 16px;
+      margin-bottom: 92px;
+      border-radius: 22px;
+    }
+    .speech-bubble::after {
+      left: -9px;
+      bottom: 24px;
+      width: 18px;
+      height: 18px;
+    }
+    .speech-name {
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+    .speech-text {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 28px 20px; border-radius: 24px; }
+    .intro-features { grid-template-columns: 1fr; gap: 8px; }
+    .feature { padding: 12px 16px; display: flex; gap: 12px; align-items: center; justify-content: flex-start; text-align: left; }
+    .feature-icon { font-size: 20px; margin-bottom: 0; }
+    .bee-mascot { width: 180px; height: 180px; }
+    .brand-bar img { height: 36px; }
+    .profile-grid { grid-template-columns: 1fr; }
+    .container { padding-bottom: 120px; }
+    .reaction-bee { width: 132px; height: 132px; transform: translateY(18px); }
+    .speech-bubble { padding: 12px 14px; margin-bottom: 82px; }
+    .speech-text { font-size: 12px; }
+    .zzzumzi-reaction.show { bottom: 6px; }
+
+    .product-gift-card { padding: 20px 16px 18px; border-radius: 24px; }
+    .gift-product-wrap { padding: 12px; gap: 12px; border-radius: 18px; }
+    .gift-image-frame { width: 92px; height: 92px; border-radius: 16px; padding: 5px; }
+    .gift-product-name { font-size: 16px; }
+    .gift-product-description { font-size: 12.5px; }
+    .gift-product-code { font-size: 24px; }
+    .gift-product-button { font-size: 14px; padding: 13px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="floating-deco deco-blob b1"></div>
+<div class="floating-deco deco-blob b2"></div>
+<div class="floating-deco deco-blob b3"></div>
+
+<div class="container">
+
+  <div class="brand-bar">
+    <img src="images/spring-farma-logo.png" alt="Spring Farma" />
+  </div>
+
+  <!-- INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="card">
+      <div class="bee-mascot">
+        <img src="images/zzzumzi.png" alt="Zzzumzi - albinuța Spring Farma" />
+      </div>
+
+      <h1 class="intro-title">
+        Bzzz! Eu sunt <span class="z">Zzzumzi</span>!<br>
+        Hai să vedem cât de <span class="highlight">bine ai grijă</span> de tine.
+      </h1>
+
+      <p class="intro-subtitle">
+        Răspunde la câteva întrebări despre tine, apoi trecem la quiz-ul personalizat.<br>
+        Promit: durează puțin și nu ustură deloc. 🌿
+      </p>
+
+      <div class="intro-features">
+        <div class="feature">
+          <div class="feature-icon">🧠</div>
+          <div class="feature-text">Quiz personalizat</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-text">10 întrebări relevante</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🍯</div>
+          <div class="feature-text">Borcane la final</div>
+        </div>
+      </div>
+
+      <div class="profile-box">
+        <div class="profile-title">Mai întâi, spune-mi câteva lucruri despre tine</div>
+        <div class="profile-help">Așa aleg întrebări mai potrivite pentru tine și îți ofer un rezultat mai relevant.</div>
+
+        <div class="profile-grid">
+          <div class="field">
+            <label for="gender">Gen</label>
+            <select id="gender">
+              <option value="">Alege o variantă</option>
+              <option value="male">Bărbat</option>
+              <option value="female">Femeie</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="age-range">Interval de vârstă</label>
+            <select id="age-range">
+              <option value="">Alege intervalul</option>
+              <option value="18-24">18–24 ani</option>
+              <option value="25-34">25–34 ani</option>
+              <option value="35-44">35–44 ani</option>
+              <option value="45-54">45–54 ani</option>
+              <option value="55+">55+ ani</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="weight">Greutate (kg)</label>
+            <input id="weight" type="number" min="30" max="250" step="0.1" placeholder="Ex.: 68" />
+          </div>
+
+          <div class="field">
+            <label for="height">Înălțime (cm)</label>
+            <input id="height" type="number" min="120" max="230" step="0.1" placeholder="Ex.: 172" />
+          </div>
+        </div>
+
+        <div class="profile-error" id="profile-error">Te rog completează toate câmpurile înainte să pornim quiz-ul.</div>
+      </div>
+
+      <button class="btn" onclick="startQuiz()">Începem quiz-ul 🐝</button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <div class="card">
+      <div class="quiz-header">
+        <div class="progress-top">
+          <span class="progress-label" id="progress-label">1 din 10</span>
+          <span class="honey-score">🍯 <span id="score-label">0</span> borcane</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="category-tag" id="category-tag">Categorie</div>
+      <h2 class="question-text" id="question-text">Întrebare...</h2>
+
+      <div class="options" id="options-container"></div>
+
+      <div class="next-btn-wrap" id="next-btn-wrap">
+        <button class="btn" id="next-btn" onclick="nextQuestion()">Următoarea →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div class="card">
+      <div class="result-hero">
+        <div class="result-bee">
+          <img src="images/zzzumzi.png" alt="Zzzumzi" />
+        </div>
+        <div class="result-emoji" id="result-emoji">🐝</div>
+      </div>
+
+      <div class="score-display">
+        <div>
+          <span class="score-number" id="final-score">0</span>
+          <span class="score-label">/30</span>
+        </div>
+        <div class="score-subtitle">🍯 borcane de miere strânse</div>
+      </div>
+
+      <h2 class="diagnosis-title" id="diagnosis-title"></h2>
+      <p class="diagnosis-text" id="diagnosis-text"></p>
+
+      <div class="product-gift-card" id="product-gift-card" aria-live="polite">
+        <div class="gift-sparkles" aria-hidden="true">
+          <span>✨</span><span>🎉</span><span>⭐</span><span>✨</span><span>🌟</span><span>💫</span>
+        </div>
+        <div class="gift-badge">🎁 Ai deblocat un cadou!</div>
+        <div class="gift-intro">Zzzumzi și Spring Farma ți-au pregătit o recomandare personalizată pentru tine.</div>
+        <div class="gift-product-wrap">
+          <div class="gift-image-frame">
+            <img id="gift-product-image" class="gift-product-image" src="images/products/tonico.png" alt="Produs recomandat">
+          </div>
+          <div class="gift-product-content">
+            <div class="gift-product-label">Produsul tău recomandat</div>
+            <h3 id="gift-product-name" class="gift-product-name">Tonico Forte</h3>
+            <p id="gift-product-description" class="gift-product-description">Sprijin pentru energie și vitalitate în perioadele solicitante.</p>
+          </div>
+        </div>
+        <div class="gift-code-box">
+          <span class="gift-code-label">🎟️ Codul tău special</span>
+          <strong id="gift-product-code" class="gift-product-code">ENERGIE10</strong>
+          <span class="gift-code-help">Extra 10% reducere la produsul recomandat</span>
+        </div>
+        <a id="gift-product-link" class="gift-product-button" href="#" target="_blank" rel="noopener">Revendică-ți cadoul 🎁</a>
+      </div>
+
+      <div class="cta-box">
+        <div class="cta-title">🌿 Sănătatea la un click distanță!</div>
+        <div class="cta-text">
+          Spring Farma îți aduce produsele direct acasă.<br>
+          Cele mai mici prețuri de pe piață, garantat!
+        </div>
+        <a href="https://springfarma.com" target="_blank" class="btn">Vizitează Spring Farma 🛒</a>
+      </div>
+
+      <button class="btn btn-outline" onclick="restartQuiz()">🔄 Mai încearcă o dată</button>
+
+      <div class="footer-brand">
+        Cu drag, <strong>Zzzumzi</strong> 🐝 de la <strong>Spring Farma</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Zzzumzi speech bubble -->
+<div class="zzzumzi-reaction" id="zzzumzi-reaction">
+  <div class="reaction-bee">
+    <img src="images/zzzumzi.png" alt="Zzzumzi" />
+  </div>
+  <div class="speech-bubble">
+    <div class="speech-name">Zzzumzi zice:</div>
+    <div class="speech-text" id="reaction-text"></div>
+  </div>
+</div>
+
+<script>
+// ============================================
+// 50 QUESTIONS POOL - picks 10 random each game
+// Zzzumzi is FEMININE (ea, prietena, eu sunt ...)
+// ============================================
+const allQuestions = [
+  // === HIDRATARE & ALIMENTAȚIE (10) ===
+  {
+    category: "💧 Hidratare",
+    question: "Câte pahare de apă bei într-o zi obișnuită?",
+    options: [
+      { text: "8+ pahare — sunt hidratat ca o floare după ploaie 🌸", points: 3, comment: "UAU! Ești mai hidratat decât un stup întreg. Fetelor, luați notițe!" },
+      { text: "4-6 pahare — rezonabil, nu?", points: 2, comment: "Rezonabil, da. Dar eu cred în tine — mai trage două pahare și ești gata!" },
+      { text: "1-3 pahare — cafeaua nu se pune?", points: 1, comment: "Scumpule, cafeaua NU e apă. Am verificat. De două ori." },
+      { text: "Apă? Ce e aia? 🧃", points: 0, comment: "Bzzz... eu zbor toată ziua și tot beau apă. Măcar un pahar, te rog!" }
+    ]
+  },
+  {
+    category: "🍎 Alimentație",
+    question: "Câte porții de fructe și legume mănânci pe zi?",
+    options: [
+      { text: "5+ porții — sunt prietenul albinelor! 🌻", points: 3, comment: "Ești o legendă! Când cresc mare, vreau să mănânc ca tine!" },
+      { text: "2-4 porții — variat și decent", points: 2, comment: "Bună treabă! Mai adaugă o salată și devii oficial VIP-ul stupului!" },
+      { text: "1 porție, dacă îmi amintesc", points: 1, comment: "Hmm... o banană pe săptămână NU te face sănătos. Îmi pare rău!" },
+      { text: "Ketchup-ul contează ca legumă? 🤔", points: 0, comment: "Nu, scumpule. Și nici pizza cu roșii. Am întrebat-o pe mama albină!" }
+    ]
+  },
+  {
+    category: "🍬 Zahăr",
+    question: "Cât zahăr consumi zilnic (dulciuri, sucuri, cafea)?",
+    options: [
+      { text: "Foarte puțin — prefer fructele proaspete 🍓", points: 3, comment: "Disciplină de regină! Eu fac miere, dar nici eu nu mănânc atât!" },
+      { text: "Moderat — îmi permit ocazional", points: 2, comment: "Echilibru perfect! Viața fără dulce e tristă, ai dreptate!" },
+      { text: "Destul de mult, recunosc 🍰", points: 1, comment: "Te văd, te văd! Zahărul e prietenul fals — îți dă energie și ți-o fură!" },
+      { text: "Zahărul e al 5-lea macronutrient al meu 🍩", points: 0, comment: "Bzzz! Eu fac miere și tot nu mănânc atâta. Revizuim împreună?" }
+    ]
+  },
+  {
+    category: "🥤 Hidratare",
+    question: "Ce bei cel mai des în afară de apă?",
+    options: [
+      { text: "Ceai de plante sau infuzii 🍵", points: 3, comment: "Ești o vrăjitoare modernă și îmi place! Ceaiul e magie lichidă!" },
+      { text: "Sucuri naturale, cafea cu moderație", points: 2, comment: "Bună alegere! Cafeaua e prietena mea, dar cu limită — ca relațiile toxice!" },
+      { text: "Cafea cu zahăr, poate un suc", points: 1, comment: "Mmm... zahărul e ca un ex care te sună la 3 dimineața. Fugi!" },
+      { text: "Energizante și cole non-stop ⚡", points: 0, comment: "Scumpule, inima ta îmi trimite SMS-uri. Vrea să te relaxezi!" }
+    ]
+  },
+  {
+    category: "🍳 Alimentație",
+    question: "Iei micul dejun dimineața?",
+    options: [
+      { text: "Da, în fiecare zi, variat și nutritiv 🥣", points: 3, comment: "Perfect! Micul dejun e combustibilul zilei. Ești o mașinărie!" },
+      { text: "Aproape zilnic, dar nu mereu", points: 2, comment: "Bine! Mai îmbunătățim puțin și suntem gata de Olimpiadă!" },
+      { text: "Doar o cafea, de obicei ☕", points: 1, comment: "Cafeaua singură e ca un dans fără muzică. Adaugă ceva, te rog!" },
+      { text: "Nu, sar peste el cu spor 🚫", points: 0, comment: "Bzzz! Corpul tău se trezește flămând. Măcar un fruct, da?" }
+    ]
+  },
+  {
+    category: "🧂 Alimentație",
+    question: "Cât de des mănânci fast food/mâncare procesată?",
+    options: [
+      { text: "Rar, poate o dată pe lună 🥗", points: 3, comment: "Respect! Corpul tău îți trimite scrisori de mulțumire!" },
+      { text: "O dată pe săptămână, cam așa", points: 2, comment: "Echilibrat și normal. Ești om, nu robot din Minecraft!" },
+      { text: "De 2-3 ori pe săptămână 🍔", points: 1, comment: "Hmm... prea mult. Stomacul tău are nevoie de o vacanță!" },
+      { text: "Zilnic — cine are timp să gătească?", points: 0, comment: "Oh, scumpule. Hai să găsim niște soluții rapide și sănătoase!" }
+    ]
+  },
+  {
+    category: "🥦 Alimentație",
+    question: "Mănânci legume verzi?",
+    options: [
+      { text: "Zilnic — salate, spanac, broccoli ✨", points: 3, comment: "Verde ca un feed de Instagram bine ales! Albinele te iubesc!" },
+      { text: "De câteva ori pe săptămână", points: 2, comment: "Bună rutină! Verdețurile sunt combustibilul regal!" },
+      { text: "Rar, nu le agreez", points: 1, comment: "Te înțeleg, dar încearcă cu hummus sau brânză — trișează puțin!" },
+      { text: "Verdele e pentru iepuri 🥬", points: 0, comment: "Știi ce face iepurele? Sare. Știi de ce? Legume! 🥕" }
+    ]
+  },
+  {
+    category: "🐟 Alimentație",
+    question: "Consumi pește / surse de Omega 3?",
+    options: [
+      { text: "Da, de 2-3 ori pe săptămână 🐟", points: 3, comment: "Creierul tău zumzăie de fericire! Omega 3 e aur pur!" },
+      { text: "Ocazional — nuci, semințe, pește", points: 2, comment: "Varietate frumoasă! Diversitatea e regina sănătății!" },
+      { text: "Rar, poate o dată pe lună", points: 1, comment: "Mai încearcă niște nuci sau semințe de in — sunt mici, dar puternice!" },
+      { text: "Omega ce? 🤷", points: 0, comment: "Omega 3 e ca vitamina pentru creier. Zzzumzi recomandă!" }
+    ]
+  },
+  {
+    category: "🧃 Hidratare",
+    question: "Primul lucru pe care îl bei dimineața?",
+    options: [
+      { text: "Un pahar mare de apă 💧", points: 3, comment: "Campionul meu! Așa se pornește ziua, cu stil!" },
+      { text: "Apă cu lămâie sau ceai", points: 3, comment: "Super! Lămâia + apa = combo perfect pentru trezire!" },
+      { text: "Cafea direct, apoi poate apă ☕", points: 1, comment: "Cafea pe stomac gol? Aoleu! Măcar un pahar de apă întâi!" },
+      { text: "Nimic, nu îmi e sete dimineața", points: 0, comment: "Corpul tău s-a deshidratat toată noaptea! Apa e salvarea!" }
+    ]
+  },
+  {
+    category: "🍽️ Alimentație",
+    question: "Mănânci mese regulate sau doar când îți amintești?",
+    options: [
+      { text: "3 mese pe zi + 1-2 gustări sănătoase 📅", points: 3, comment: "Rutină de Rolls Royce! Metabolismul tău îți mulțumește!" },
+      { text: "Cam regulat, cu mici variații", points: 2, comment: "Flexibilitate sănătoasă. Ești o albină pragmatică!" },
+      { text: "Sar peste mese destul de des", points: 1, comment: "Ups! Corpul tău crede că ești pe o insulă pustie. Alimentează-l!" },
+      { text: "Mănânc când îmi amintesc (rar)", points: 0, comment: "Scumpule, setează-ți alarme! Corpul tău are nevoie de tine!" }
+    ]
+  },
+
+  // === SOMN & ODIHNĂ (8) ===
+  {
+    category: "😴 Somn",
+    question: "Câte ore dormi în medie pe noapte?",
+    options: [
+      { text: "7-9 ore — dorm ca o albină în stup 🛏️", points: 3, comment: "Perfect! Somnul e ca mierea — dulce, dens și esențial!" },
+      { text: "6-7 ore — mă descurc", points: 2, comment: "Aproape! Mai fură 30 de minute de la Netflix — seriile te așteaptă!" },
+      { text: "5-6 ore — cafeaua mă ține treaz", points: 1, comment: "Atenție! Chiar și albinele regine dorm. Iar eu sunt obosită doar privindu-te!" },
+      { text: "Ce e somnul? TikTok nu doarme niciodată 📱", points: 0, comment: "Oh, scumpule... telefonul jos, capul pe pernă. URGENT!" }
+    ]
+  },
+  {
+    category: "☀️ Somn",
+    question: "Te trezești odihnit dimineața?",
+    options: [
+      { text: "Da, zumzăi de energie! ⚡", points: 3, comment: "Fantastic! Ești mai fresh decât polenul de dimineață!" },
+      { text: "După prima cafea, da", points: 2, comment: "Tipic uman! Încearcă o săptămână fără cafea — vei fi surprins!" },
+      { text: "Greu, foarte greu... ☕☕☕", points: 1, comment: "Oh no! Poate e vremea pentru niște magneziu de la Spring Farma?" },
+      { text: "Sună alarma de 7 ori și tot dorm", points: 0, comment: "Alarma ta a renunțat la viață. Și eu, uitându-mă la ea!" }
+    ]
+  },
+  {
+    category: "📱 Somn",
+    question: "Cu cât timp înainte de culcare lași telefonul?",
+    options: [
+      { text: "Cu cel puțin o oră înainte 📵", points: 3, comment: "Ești un zen master! Creierul tău doarme ca un bebeluș!" },
+      { text: "Vreo 30 de minute înainte", points: 2, comment: "Bine! Mai adaugă 30 și ai atins nirvana somnului!" },
+      { text: "Până adorm cu el în mână 📱", points: 1, comment: "Ecranul albastru e vrăjitoare rea. Fugi de el!" },
+      { text: "Adorm cu TikTok pornit", points: 0, comment: "Oh, scumpule! Creierul tău nu se oprește niciodată! Pauză!" }
+    ]
+  },
+  {
+    category: "🌙 Somn",
+    question: "Ai un program fix de culcare?",
+    options: [
+      { text: "Da, mă culc și mă trezesc la aceleași ore ⏰", points: 3, comment: "Disciplină elvețiană! Corpul tău te iubește enorm!" },
+      { text: "Aproximativ — cam aceeași oră", points: 2, comment: "Super! Mici variații sunt normale. Ești om, nu ceas!" },
+      { text: "Variat — depinde de zi", points: 1, comment: "Hmm... corpul tău e confuz ca un GPS fără semnal!" },
+      { text: "Mă culc când mă prinde somnul 🌙", points: 0, comment: "Bzzz! Ritmul circadian al tău a luat vacanță permanentă!" }
+    ]
+  },
+  {
+    category: "😴 Somn",
+    question: "Te trezești în timpul nopții?",
+    options: [
+      { text: "Rar, dorm neîntrerupt 🌟", points: 3, comment: "Perfect! Somnul de calitate e superputerea ta!" },
+      { text: "Ocazional, o dată pe noapte", points: 2, comment: "Normal, scumpule. Chiar și albinele se mai trezesc!" },
+      { text: "Destul de des, nu dorm profund", points: 1, comment: "Hmm... poate un ceai de valeriană? Spring Farma are, șoaptă-șoaptă!" },
+      { text: "Mereu, parcă nici nu dorm", points: 0, comment: "Scumpule, ai nevoie de ajutor! Nu e normal și nu trebuie să suferi!" }
+    ]
+  },
+  {
+    category: "☕ Somn",
+    question: "Bei cafea după ora 15:00?",
+    options: [
+      { text: "Niciodată — după 12:00 e apă și ceai ✨", points: 3, comment: "Disciplină de samurai! Somnul tău e protejat ca trezoreria!" },
+      { text: "Rar, doar ocazional", points: 2, comment: "Bună! Cafeaua de după-amiază e ca un musafir nepoftit!" },
+      { text: "Da, cam mereu o cafea de seară ☕", points: 1, comment: "Și apoi te întrebi de ce nu adormi... Misterul e rezolvat!" },
+      { text: "Beau cafea și la 10 seara 🙃", points: 0, comment: "Bzzz! Somnul tău plânge. Și eu, cu el!" }
+    ]
+  },
+  {
+    category: "🛏️ Somn",
+    question: "Dormi cu telefonul sub pernă/lângă pat?",
+    options: [
+      { text: "Nu, e în altă cameră 📴", points: 3, comment: "Respect maxim! Creierul tău e relaxat ca la spa!" },
+      { text: "Lângă pat, dar pe 'do not disturb'", points: 2, comment: "Compromis înțelept! Ești un diplomat al somnului!" },
+      { text: "Sub pernă, ca să aud alarma", points: 1, comment: "Undele alea nu-ți plac. Pune-l măcar pe noptieră!" },
+      { text: "În mână, practic 📱", points: 0, comment: "Scumpule, telefonul tău primește mai multă atenție decât partenerul!" }
+    ]
+  },
+  {
+    category: "🌞 Somn",
+    question: "Tragi pui de somn (nap) peste zi?",
+    options: [
+      { text: "Da, un power nap de 20 min 💤", points: 3, comment: "Tu înțelegi viața! Napul e un cadou pentru creier!" },
+      { text: "Ocazional, când sunt foarte obosit", points: 2, comment: "Echilibru bun! Când ai nevoie, nu refuzi. Smart move!" },
+      { text: "Nu, nu pot să adorm ziua", points: 2, comment: "Nimic greșit! Unii suntem vulturi, alții bufnițe!" },
+      { text: "Dorm 3 ore și apoi nu mai pot noaptea", points: 0, comment: "Ups! Napul e 20 min, nu o vacanță! Setează alarmă!" }
+    ]
+  },
+
+  // === MIȘCARE & SPORT (8) ===
+  {
+    category: "🏃 Mișcare",
+    question: "Cât de des faci mișcare pe săptămână?",
+    options: [
+      { text: "4+ ori — sunt un stup pe două picioare 💪", points: 3, comment: "UAU! Ești mai activ decât mine, și eu bat din aripi de 200 de ori pe secundă!" },
+      { text: "2-3 ori — încerc, serios!", points: 2, comment: "Frumos! Consistența bate intensitatea oricând — ești pe drumul bun!" },
+      { text: "Odată pe săptămână, poate", points: 1, comment: "Hmm... corpul tău vrea să danseze mai mult! Dă-i voie!" },
+      { text: "Doar când fug după autobuz 🏃💨", points: 0, comment: "Bzzz! Chiar și o plimbare de 15 minute ajută. Promit!" }
+    ]
+  },
+  {
+    category: "🚶 Mișcare",
+    question: "Câți pași faci în medie pe zi?",
+    options: [
+      { text: "10.000+ pași, sunt campion 🥇", points: 3, comment: "Ești o gazelă modernă! Inima ta bate samba de bucurie!" },
+      { text: "6.000-10.000 pași", points: 2, comment: "Super! Aproape de țintă — încă câteva plimbări și ești acolo!" },
+      { text: "3.000-6.000 pași", points: 1, comment: "Hmm... scaunul e comod, știu. Dar plimbările sunt magie!" },
+      { text: "Mai puțin de 3.000 — muncesc la birou 💻", points: 0, comment: "Oh scumpule, măcar la fiecare oră ridică-te! Corpul tău te imploră!" }
+    ]
+  },
+  {
+    category: "🧘 Mișcare",
+    question: "Faci stretching sau yoga?",
+    options: [
+      { text: "Da, zilnic — corpul meu e fericit 🧘", points: 3, comment: "Flexibil ca o pisică! Invidie pură, serios!" },
+      { text: "Ocazional, mai ales după sport", points: 2, comment: "Bună rutină! Stretching-ul e like & subscribe pentru corp!" },
+      { text: "Rar, când îmi amintesc", points: 1, comment: "Corpul tău are contracturi. Se plânge. Te aude?" },
+      { text: "Nu, nu am timp / nu știu cum", points: 0, comment: "Bzzz! 5 minute pe YouTube schimbă viața! Încearcă!" }
+    ]
+  },
+  {
+    category: "💪 Mișcare",
+    question: "Faci exerciții de forță (greutăți)?",
+    options: [
+      { text: "Da, de 2-3 ori pe săptămână 🏋️", points: 3, comment: "Forță de campion! Oasele tale vor fi recunoscătoare la 70 de ani!" },
+      { text: "Ocazional, când pot", points: 2, comment: "Bine! Începe cu ce poți — consistența învinge intensitatea!" },
+      { text: "Fac doar cardio", points: 1, comment: "Cardio e bun, dar forța e REGINA! Adaugă un pic, te rog!" },
+      { text: "Greutăți? Sunt speriat 😨", points: 0, comment: "Nu mușcă! Începe cu ce ai în casă — sticle de apă, saci cu orez!" }
+    ]
+  },
+  {
+    category: "🌳 Mișcare",
+    question: "Faci mișcare în aer liber?",
+    options: [
+      { text: "Da, aproape zilnic 🌲", points: 3, comment: "Ești o nimfă a pădurii! Și eu, albina, aprob 100%!" },
+      { text: "Weekend-urile, da", points: 2, comment: "Bună rutină! Natura e spa-ul gratuit al sufletului!" },
+      { text: "Rar — mai mult sală", points: 1, comment: "Sala e ok, dar natura... natura e magie pură!" },
+      { text: "Aer liber = de la ușă la mașină 🚗", points: 0, comment: "Bzzz! Soarele are vitamina D pentru tine! Ieși, te rog!" }
+    ]
+  },
+  {
+    category: "🏃 Mișcare",
+    question: "Ai o activitate sportivă preferată?",
+    options: [
+      { text: "Da, și mă pasionează 💖", points: 3, comment: "Pasiunea + sportul = rețeta fericirii! Perfect!" },
+      { text: "Mai multe — încerc diverse", points: 3, comment: "Diversitate înseamnă progres! Ești un explorator!" },
+      { text: "Nu prea... fac ce se nimerește", points: 1, comment: "Găsește-ți una pe care o iubești! E ca dragostea — trebuie să clicheze!" },
+      { text: "Sportul nu e pentru mine 🙅", points: 0, comment: "E pentru TOATĂ lumea! Poate dansul? Înotul? Mersul pe jos?" }
+    ]
+  },
+  {
+    category: "🧗 Mișcare",
+    question: "Urci pe scări sau folosești liftul?",
+    options: [
+      { text: "Mereu pe scări — e gym gratis 🏃", points: 3, comment: "Inima ta face dans de bucurie! Mișto geniul!" },
+      { text: "Depinde — până la etajul 3 pe scări", points: 2, comment: "Decizie înțeleaptă! Echilibru între efort și lene!" },
+      { text: "Doar dacă liftul e stricat", points: 1, comment: "Liftul te face leneș, scumpule! Provoacă-te!" },
+      { text: "Liftul e prietenul meu cel mai bun", points: 0, comment: "Mutați prietenia pe scări! Corpul tău îți va trimite flori!" }
+    ]
+  },
+  {
+    category: "🤸 Mișcare",
+    question: "Simți că stai prea mult pe scaun?",
+    options: [
+      { text: "Nu, mă mișc constant peste zi 🚶", points: 3, comment: "Ești un perpetuum mobile! Invidie sănătoasă!" },
+      { text: "Uneori, dar fac pauze regulate", points: 2, comment: "Conștient și proactiv! Așa se procedează!" },
+      { text: "Da, stau 8+ ore zilnic pe scaun", points: 1, comment: "Fundul tău plânge, scumpule! Ridică-te la fiecare oră!" },
+      { text: "Scaunul și cu mine ne-am căsătorit 💍", points: 0, comment: "Divorț urgent! Corpul tău merită libertate!" }
+    ]
+  },
+
+  // === VITAMINE & SUPLIMENTE (6) ===
+  {
+    category: "💊 Vitamine",
+    question: "Iarna, te gândești la vitamine?",
+    options: [
+      { text: "Da, vitamina D și C sunt prietenele mele! ☀️", points: 3, comment: "Bravo! Iarna, soarele se ascunde — vitamina D e esențială!" },
+      { text: "Iau ocazional, când îmi aduc aminte", points: 2, comment: "Consistența contează! Pune-ți un reminder — va face minuni!" },
+      { text: "Doar când deja am răcit 🤧", points: 1, comment: "Prea târziu, scumpule! Prevenția e cheia — nu post-factum!" },
+      { text: "Vitaminele? Nu știu, e complicat...", points: 0, comment: "Nu e complicat! Vino pe Spring Farma, Zzzumzi te ghidează personal!" }
+    ]
+  },
+  {
+    category: "☀️ Vitamine",
+    question: "Știi nivelul tău de vitamina D?",
+    options: [
+      { text: "Da, fac analize anuale 📊", points: 3, comment: "Ești un Sherlock al sănătății! Medicul tău te iubește!" },
+      { text: "Am făcut o dată, demult", points: 2, comment: "Ok, dar ar fi timpul să verifici din nou! Nivelurile se schimbă!" },
+      { text: "Nu — stau la soare, deci e ok?", points: 1, comment: "Ups! În România, vitamina D e problematică 6 luni pe an!" },
+      { text: "Vitamina D... există?", points: 0, comment: "Există, există! Și probabil ai deficit. 80% din români au!" }
+    ]
+  },
+  {
+    category: "🧲 Vitamine",
+    question: "Iei magneziu pentru stres/crampe/somn?",
+    options: [
+      { text: "Da, îl iau regulat și mă simt minunat ✨", points: 3, comment: "Magneziul e un mic erou! Bine făcut, scumpule!" },
+      { text: "Ocazional, când am nevoie", points: 2, comment: "Bună decizie! Ascultarea corpului e artă, nu știință!" },
+      { text: "Am auzit de el, dar nu iau", points: 1, comment: "Magneziul e MVP-ul mineralelor! Merită o șansă!" },
+      { text: "Magneziu? Credeam că e pentru atleți", points: 0, comment: "E pentru TOȚI, scumpule! Stres, crampe, somn — magie pură!" }
+    ]
+  },
+  {
+    category: "🌿 Vitamine",
+    question: "Iei probiotice pentru sănătatea digestivă?",
+    options: [
+      { text: "Da, mai ales după antibiotice 🦠", points: 3, comment: "Microbiomul tău îți trimite cadouri! Excelent!" },
+      { text: "Ocazional, pentru imunitate", points: 2, comment: "Bună strategie! Intestinul fericit = tu fericit!" },
+      { text: "Mănânc iaurt, să conteze?", points: 2, comment: "Da, contează! Iaurtul e un probiotic natural minunat!" },
+      { text: "Probio-ce? 🤔", points: 0, comment: "Bacterii bune care te ajută! Sunt ca prietenii tăi din stomac!" }
+    ]
+  },
+  {
+    category: "💊 Vitamine",
+    question: "Cum alegi suplimentele pe care le iei?",
+    options: [
+      { text: "După recomandarea medicului/farmacistului 👩‍⚕️", points: 3, comment: "Abordare profesionistă! Exact cum trebuie, scumpule!" },
+      { text: "Cercetez online, citesc review-uri", points: 2, comment: "Diligent! Dar un farmacist e mai ieftin decât o eroare!" },
+      { text: "Ce îmi recomandă prietenii", points: 1, comment: "Prietenii sunt scumpi, dar farmacistul are studii. Întreabă-l!" },
+      { text: "Iau ce văd în reclamă 📺", points: 0, comment: "Oh nu! Reclama vrea banii tăi, nu sănătatea ta!" }
+    ]
+  },
+  {
+    category: "🍊 Vitamine",
+    question: "Iei vitamina C regulat?",
+    options: [
+      { text: "Da, zilnic, prin alimentație sau suplimente 🍋", points: 3, comment: "Imunitatea ta e un fort de neînvins!" },
+      { text: "Iarna și când mă simt rău", points: 2, comment: "Bună strategie sezonieră! Așa procedează profesioniștii!" },
+      { text: "Nu, dar mănânc ocazional citrice", points: 1, comment: "Citricele sunt super! Mai adaugă un kiwi și ești eroul meu!" },
+      { text: "Vitamina C? Pastilele alea efervescente?", points: 0, comment: "Efervescentele sunt un început bun! Vino pe Spring Farma!" }
+    ]
+  },
+
+  // === SĂNĂTATE MENTALĂ & STRES (8) ===
+  {
+    category: "🧘 Sănătate Mentală",
+    question: "Cum gestionezi stresul zilnic?",
+    options: [
+      { text: "Meditez, respir adânc, îmi iau pauze 🧘", points: 3, comment: "Zen de albină! Mintea ta îți mulțumește cu flori!" },
+      { text: "Mă plimb, vorbesc cu prieteni", points: 2, comment: "Super! Conexiunile umane sunt ca stupul — ne țin vii!" },
+      { text: "Mă uit la seriale și uit de toate", points: 1, comment: "Merge pe termen scurt, scumpule. Dar găsește și alte ventile!" },
+      { text: "Stres? Eu SUNT stresul 😵‍💫", points: 0, comment: "Oh nu! Bzzz, hai să inspirăm adânc împreună. E important!" }
+    ]
+  },
+  {
+    category: "😊 Sănătate Mentală",
+    question: "Cât de des râzi cu poftă?",
+    options: [
+      { text: "Zilnic — viața e o comedie! 😂", points: 3, comment: "Ești o regină! Râsul e medicament gratis!" },
+      { text: "Destul de des, câteva ori pe săptămână", points: 2, comment: "Frumos! Continuă să cauți motive de zâmbit!" },
+      { text: "Rar, sunt o persoană serioasă", points: 1, comment: "Seriozitatea e bună, dar râsul e vitamina sufletului! Încearcă!" },
+      { text: "Nu prea am motive de râs 😔", points: 0, comment: "Scumpule... te îmbrățișez virtual. Vrei să-ți spun o glumă? 🐝" }
+    ]
+  },
+  {
+    category: "💭 Sănătate Mentală",
+    question: "Ai timp pentru tine, doar pentru tine?",
+    options: [
+      { text: "Da, îmi prioritizez 'me time' 💖", points: 3, comment: "Înțelegi self-love-ul! Ești un exemplu, serios!" },
+      { text: "Ocazional, când pot", points: 2, comment: "Bună! Fă-ți mai multe astfel de momente — meriți!" },
+      { text: "Rar, mereu am ceva de făcut", points: 1, comment: "Scumpule, te rog! Fără me time, devii gol. Prioritizează!" },
+      { text: "Me time? Ce e aia? 🤯", points: 0, comment: "Oh no! Imediat! O oră pe săptămână DOAR pentru tine. Promit!" }
+    ]
+  },
+  {
+    category: "🧠 Sănătate Mentală",
+    question: "Ai vorbit vreodată cu un psiholog/terapeut?",
+    options: [
+      { text: "Da, merg regulat — e important 💚", points: 3, comment: "Ești un exemplu de maturitate emoțională! Respect imens!" },
+      { text: "Am mers o perioadă, a ajutat", points: 3, comment: "Bine ai făcut! Terapia e ca dentistul — pentru suflet!" },
+      { text: "Mă gândesc, dar nu încă", points: 2, comment: "Nu e nicio grabă, dar nici amâna prea mult, scumpule!" },
+      { text: "Nu, nu cred în așa ceva 🚫", points: 0, comment: "Terapia nu e religie, scumpule. E sănătate! Cel puțin informează-te!" }
+    ]
+  },
+  {
+    category: "📵 Sănătate Mentală",
+    question: "Faci digital detox ocazional?",
+    options: [
+      { text: "Da, zile întregi fără telefon 🌿", points: 3, comment: "Libertate pură! Creierul tău e un hamac relaxat!" },
+      { text: "Da, câteva ore pe zi", points: 2, comment: "Super! Micile pauze schimbă totul!" },
+      { text: "Încerc, dar cedez repede", points: 1, comment: "Lupta e reală! Scroll-ul e drog. Pas cu pas, scumpule!" },
+      { text: "Telefonul e extensia mâinii mele 📱", points: 0, comment: "Nomofobia — există, e reală. Azi, 5 minute fără. Da?" }
+    ]
+  },
+  {
+    category: "💬 Sănătate Mentală",
+    question: "Ai oameni cu care vorbești despre probleme?",
+    options: [
+      { text: "Da, am o rețea solidă 👯", points: 3, comment: "Bogăție adevărată! Stupul tău e plin de iubire!" },
+      { text: "Am 1-2 oameni apropiați", points: 3, comment: "Asta contează! Calitate, nu cantitate, campionule!" },
+      { text: "Mai mult vorbesc cu mine însumi", points: 1, comment: "Monologul e ok, dar dialogul e magic! Caută pe cineva!" },
+      { text: "Țin totul pentru mine 🤐", points: 0, comment: "Scumpule... asta doare pe termen lung. Cuvintele vor să zboare!" }
+    ]
+  },
+  {
+    category: "🎨 Sănătate Mentală",
+    question: "Ai un hobby/pasiune care îți aduce bucurie?",
+    options: [
+      { text: "Da, și investesc timp în el regulat 🎨", points: 3, comment: "Sufletul tău are combustibil! Minunat!" },
+      { text: "Am mai multe mici pasiuni", points: 3, comment: "Diversitate de bucurii! Ești o floare cu multe petale!" },
+      { text: "Am avut, dar am abandonat", points: 1, comment: "Reînvie-le, scumpule! Pasiunile nu mor, doar dormitează!" },
+      { text: "Pasiuni? Când să am timp?", points: 0, comment: "Timp se face, nu se găsește! 15 minute pe zi = o pasiune!" }
+    ]
+  },
+  {
+    category: "🌅 Sănătate Mentală",
+    question: "Cum începi dimineața?",
+    options: [
+      { text: "Cu o rutină: stretching, apă, respirație 🌅", points: 3, comment: "Scumpule, ești un manual de self-care! Aplaudă cineva!" },
+      { text: "Liniștit, fără grabă", points: 2, comment: "Liniștea de dimineață e aurul zilei! Continuă!" },
+      { text: "În grabă, cu stres ⏰", points: 1, comment: "Trezește-te cu 15 minute mai devreme! Transformă totul!" },
+      { text: "Verific telefonul imediat 📱", points: 0, comment: "Ouch! Creierul tău începe ziua în haos. Schimbă rutina!" }
+    ]
+  },
+
+  // === ÎNGRIJIRE PERSONALĂ & FRUMUSEȚE (10) ===
+  {
+    category: "✨ Îngrijire",
+    question: "Ai o rutină de îngrijire a tenului?",
+    options: [
+      { text: "Da! Curăț, hidratez, SPF — tot arsenalul ✨", points: 3, comment: "Strălucești ca mierea în soare! Pielea ta e fericită!" },
+      { text: "Cremă hidratantă și atât", points: 2, comment: "Bun început! Adaugă SPF-ul și ai învins jocul!" },
+      { text: "Apă și săpun, gata", points: 1, comment: "Hmm... pielea ta merită mai mult! E cel mai mare organ!" },
+      { text: "Aproape deloc — folosesc doar apă și săpun când îmi amintesc", points: 0, comment: "Pielea ta merită mai multă atenție. Un minim de curățare, hidratare și SPF poate schimba mult." }
+    ]
+  },
+  {
+    category: "☀️ Îngrijire",
+    question: "Folosești SPF (protecție solară)?",
+    options: [
+      { text: "Zilnic, chiar și iarna ☀️", points: 3, comment: "Viitorul tău de la 60 de ani îți trimite mulțumiri acum!" },
+      { text: "Doar vara/la plajă", points: 2, comment: "Ok, dar soarele e activ și iarna! SPF zilnic = rege!" },
+      { text: "Când îmi amintesc, rar", points: 1, comment: "Ridurile te văd și se freacă pe mâini... Fugi de ele!" },
+      { text: "SPF? Nu sunt în Caraibe 🏖️", points: 0, comment: "Soarele nu știe că ești în București! UV e UV oriunde!" }
+    ]
+  },
+  {
+    category: "🦷 Îngrijire",
+    question: "Cât de des mergi la medic pentru control?",
+    options: [
+      { text: "O dată pe an, ca ceasul 🕐", points: 3, comment: "Perfect! Prevenția e miere curată pentru sănătate!" },
+      { text: "O dată la 2 ani, cam așa", points: 2, comment: "Nu-i rău, dar mai des = mai bine, scumpule!" },
+      { text: "Doar când mă doare ceva", points: 1, comment: "Ups! Prevenția e mai ieftină decât tratamentul!" },
+      { text: "Ultimul control? Nu îmi mai amintesc...", points: 0, comment: "Bzzz de alarmă! Programează-te ASAP, te rog!" }
+    ]
+  },
+  {
+    category: "🪥 Îngrijire",
+    question: "Cum e igiena ta orală?",
+    options: [
+      { text: "2x pe zi + ață dentară + apă de gură ✨", points: 3, comment: "Dinții tăi strălucesc ca diamantele! Dentistul te iubește!" },
+      { text: "2x pe zi, fără ață dentară", points: 2, comment: "Bună rutină! Adaugă ața dentară — schimbă viața!" },
+      { text: "O dată pe zi, grabă", points: 1, comment: "Ups! Dinții tăi înoată în bacterii. Mai zici o tură?" },
+      { text: "Variat... uit uneori 🙈", points: 0, comment: "Scumpule, dinții tăi plâng! Dentistul va plânge și el, apoi tu!" }
+    ]
+  },
+  {
+    category: "💆 Îngrijire",
+    question: "Ai grijă de sănătatea părului?",
+    options: [
+      { text: "Da, mască, ulei, tratamente regulate 💇", points: 3, comment: "Părul tău e o catedrală! Sper să am și eu blana așa!" },
+      { text: "Șampon + balsam, atent la produse", points: 2, comment: "Ok! Poate ocazional o mască să dezmierde vârfurile?" },
+      { text: "Șampon și atât", points: 1, comment: "Părul tău are sete de iubire! Adaugă un balsam, măcar!" },
+      { text: "2 în 1 și să mă uit la TikTok", points: 0, comment: "Oh dragă... 2 în 1 = 0 în 0. Separă-le, te rog!" }
+    ]
+  },
+  {
+    category: "💄 Îngrijire",
+    question: "Te demachiezi seara, atunci când porți machiaj?",
+    options: [
+      { text: "Mereu, religios 🧴", points: 3, comment: "Sfânt al pielii! Porii tăi dansează de bucurie!" },
+      { text: "Aproape mereu, uit rar", points: 2, comment: "Foarte bine! Mai ai puțin până la perfecțiune!" },
+      { text: "Uit destul de des 😴", points: 1, comment: "Ups! Machiajul peste noapte = coșuri garantate!" },
+      { text: "Nu port machiaj sau foarte rar", points: 2, comment: "Perfect în regulă. Chiar și fără machiaj, curățarea blândă a tenului rămâne importantă." }
+    ]
+  },
+  {
+    category: "🛁 Îngrijire",
+    question: "Îți acorzi momente de self-care (baie, mască, etc)?",
+    options: [
+      { text: "Da, săptămânal — e sfânt 🛀", points: 3, comment: "Self-care = self-love! Ești un prinț/o prințesă!" },
+      { text: "Ocazional, când am chef", points: 2, comment: "Bună! Fă-ți asta mai frecvent — meriți!" },
+      { text: "Rar, nu am timp", points: 1, comment: "Time e ce faci din el! O baie = 30 min spa gratuit!" },
+      { text: "Self-care e pierdere de vreme", points: 0, comment: "Oh, dragă... e INVESTIȚIE, nu pierdere! Încearcă o dată!" }
+    ]
+  },
+  {
+    category: "💅 Îngrijire",
+    question: "Ai grijă de unghii (mâini și picioare)?",
+    options: [
+      { text: "Da, rutină completă cu ulei cuticular 💅", points: 3, comment: "Perfecțiune! Mâinile tale sunt o carte de vizită!" },
+      { text: "Manichiură/pedichiură regulat", points: 3, comment: "Super! Îngrijirea lor e un pic de self-love!" },
+      { text: "Le tai când sunt prea lungi", points: 1, comment: "Hmm... basic! Încearcă măcar un ulei — magie pură!" },
+      { text: "Unghiile cresc, atât ✂️", points: 0, comment: "Oh scumpule! Un mic ritual lunar schimbă totul!" }
+    ]
+  },
+  {
+    category: "👁️ Îngrijire",
+    question: "Mergi la controale la ochi?",
+    options: [
+      { text: "Anual, fără excepție 👓", points: 3, comment: "Ochii tăi sunt ca diamantele — verificate regulat!" },
+      { text: "La fiecare 2-3 ani", points: 2, comment: "Ok, dar anual e ideal — vederea se schimbă insidios!" },
+      { text: "Doar când văd neclar", points: 1, comment: "Prea târziu! Ochii au nevoie de monitorizare, nu doar reparație!" },
+      { text: "N-am fost niciodată 🙈", points: 0, comment: "Scumpule! Chiar dacă vezi bine, control = obligatoriu!" }
+    ]
+  },
+  {
+    category: "🚿 Îngrijire",
+    question: "Folosești produse cu ingrediente naturale?",
+    options: [
+      { text: "Da, citesc fiecare etichetă 🌿", points: 3, comment: "Ești un Sherlock al etichetelor! Pielea ta e Pure Queen!" },
+      { text: "Da, dar nu extremist", points: 2, comment: "Echilibrat! Nu toate chimicalele sunt rele, nu toate naturalele sunt bune!" },
+      { text: "Mai puțin... iau ce e în ofertă", points: 1, comment: "Oferta e prietena ta, dar și parabenii. Verifică etichetele!" },
+      { text: "Mă spăl cu ce e la îndemână", points: 0, comment: "Hai să începem cu lucruri mici! Spring Farma are produse bune!" }
+    ]
+  }
+];
+
+
+
+allQuestions.push(
+  {
+    category: "🪒 Îngrijire",
+    genderTargets: ["male"],
+    question: "Dacă te bărbierești, cum ai grijă de piele după ras?",
+    options: [
+      { text: "Folosesc produse potrivite și hidratez pielea după fiecare ras", points: 3, comment: "Excelent! Asta ajută pielea să rămână calmă, curată și fără iritații." },
+      { text: "Aplic uneori un balsam sau o cremă după ras", points: 2, comment: "Foarte bine. Cu puțină consecvență, pielea ta îți va mulțumi imediat." },
+      { text: "Clătesc rapid și atât", points: 1, comment: "Se poate mai bine. După ras, pielea are nevoie de puțină grijă ca să evite iritațiile." },
+      { text: "Nu acord deloc atenție acestui pas", points: 0, comment: "Hai să schimbăm asta. Un produs calmant după ras face o diferență reală." }
+    ]
+  },
+  {
+    category: "💄 Îngrijire",
+    genderTargets: ["female"],
+    question: "Cât de atentă ești la curățarea tenului după machiaj?",
+    options: [
+      { text: "Întotdeauna îmi curăț tenul complet înainte de culcare", points: 3, comment: "Minunat! Tenul curat se vede și se simte imediat mai bine." },
+      { text: "De cele mai multe ori, dar mai am și scăpări", points: 2, comment: "Foarte bine. Încă puțină consecvență și rutina ta devine excelentă." },
+      { text: "Uneori uit sau sar peste acest pas", points: 1, comment: "Tenul tău ar aprecia mai multă regularitate. Curățarea de seară contează mult." },
+      { text: "Nu prea am o rutină clară", points: 0, comment: "Nicio problemă, începi cu pași mici. O rutină simplă, dar constantă, este suficientă la început." }
+    ]
+  }
+);
+
+const profileQuestionRules = [
+  { matcher: q => /demachiezi|machiaj/i.test(q.question), targets: ["female"] },
+  { matcher: q => /bărbierit|bărbierești|după ras/i.test(q.question + ' ' + q.options.map(o => o.text).join(' ')), targets: ["male"] }
+];
+
+const diagnoses = [
+  {
+    min: 25, max: 30,
+    emoji: "👑",
+    title: "Regina Zen a Stupului",
+    text: "Tu ești albina aia care nu se stresează nici când vine furtuna. Echilibrată, radiantă și în control.",
+    product: {
+      name: "Collanova, 10 flacoane buvabile, Benesio",
+      description: "Pentru menținere, frumusețe și vitalitate — un boost premium atunci când deja ai grijă de tine.",
+      code: "BEAUTY10",
+      image: "images/products/collanova.png",
+      url: "https://www.springfarma.com/collanova-10-flacoane-buvabile-benesio.html"
+    }
+  },
+  {
+    min: 20, max: 24,
+    emoji: "⚡",
+    title: "Albinuța Turbo",
+    text: "Mergi pe baterii invizibile... dar parcă încep să se descarce. Ai energie, dar corpul tău cere puțin ajutor.",
+    product: {
+      name: "Tonico Forte 10 ml, tonic pentru organism, 10 flacoane, Benesio",
+      description: "Sprijin pentru oboseala fizică și psihică, cu 4 aminoacizi și vitamina B12.",
+      code: "ENERGIE10",
+      image: "images/products/tonico.png",
+      url: "https://www.springfarma.com/benesio-tonico-forte-10-ml-tonic-pentru-organism-10-flacoane.html"
+    }
+  },
+  {
+    min: 15, max: 19,
+    emoji: "🌻",
+    title: "Bobocelul Curajos",
+    text: "Ești la început, dar ai vibe bun. Cu puțin ajutor și consecvență, înflorești rapid.",
+    product: {
+      name: "Efi-Digest, 20 comprimate, Naturalis",
+      description: "Un ajutor bun pentru confort digestiv și pentru zilele în care mesele n-au fost tocmai prietenoase.",
+      code: "DIGEST10",
+      image: "images/products/efi-digest.png",
+      url: "https://www.springfarma.com/naturalis-efi-digest-20-comprimate-filmate-tulburari-digestive.html"
+    }
+  },
+  {
+    min: 10, max: 14,
+    emoji: "😵‍💫",
+    title: "Albina Puțin Zăpăcită",
+    text: "Ai deschis 5 task-uri, ai uitat 3 și te-ai stresat pentru toate. Corpul tău îți cere puțină liniște.",
+    product: {
+      name: "Bisglicinat de magneziu, 30 comprimate, Naturalis",
+      description: "Magneziul contribuie la reducerea oboselii și la funcționarea normală a sistemului nervos.",
+      code: "RELAX10",
+      image: "images/products/magneziu.png",
+      url: "https://www.springfarma.com/bisglicinat-de-magneziu-30-comprimate-naturalis.html"
+    }
+  },
+  {
+    min: 0, max: 9,
+    emoji: "🚨",
+    title: "Albina în Criză de Nectar",
+    text: "Nivelul de energie: pe minus. Corpul tău cere ajutor, nu cafea. E momentul pentru un reset blând, dar serios.",
+    product: {
+      name: "Hepafort, 30 capsule, Benesio",
+      description: "Suport pentru ficat și detoxifiere, cu armurariu, anghinare și colină.",
+      code: "DETOX10",
+      image: "images/products/hepafort.png",
+      url: "https://www.springfarma.com/benesio-hepafort-30-capsule.html"
+    }
+  }
+];
+
+// ============================================
+// GAME LOGIC
+// ============================================
+let quizQuestions = [];
+let currentQuestion = 0;
+let score = 0;
+let selectedOption = null;
+let profile = null;
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getQuestionTargets(question) {
+  if (Array.isArray(question.genderTargets) && question.genderTargets.length) return question.genderTargets;
+  for (const rule of profileQuestionRules) {
+    if (rule.matcher(question)) return rule.targets;
+  }
+  return ['all'];
+}
+
+function getProfileData() {
+  const gender = document.getElementById('gender').value;
+  const ageRange = document.getElementById('age-range').value;
+  const weight = parseFloat(document.getElementById('weight').value);
+  const height = parseFloat(document.getElementById('height').value);
+
+  if (!gender || !ageRange || !weight || !height) return null;
+
+  const heightMeters = height / 100;
+  const bmi = +(weight / (heightMeters * heightMeters)).toFixed(1);
+  return { gender, ageRange, weight, height, bmi };
+}
+
+function getBMIGroup(bmi) {
+  if (bmi < 18.5) return 'low';
+  if (bmi < 25) return 'balanced';
+  if (bmi < 30) return 'high';
+  return 'very-high';
+}
+
+function getQuestionWeight(question, currentProfile) {
+  const text = `${question.category} ${question.question}`.toLowerCase();
+  let weight = 1;
+  const bmiGroup = getBMIGroup(currentProfile.bmi);
+
+  if (bmiGroup === 'low' && /(alimentație|energie|mese|micul dejun|vitamine|omega|protein)/.test(text)) weight += 2;
+  if ((bmiGroup === 'high' || bmiGroup === 'very-high') && /(mișcare|sport|fast food|zahăr|hidratare|mese|scări)/.test(text)) weight += 2;
+  if ((currentProfile.ageRange === '45-54' || currentProfile.ageRange === '55+') && /(somn|analize|vitamine|preven|tensi|mișcare)/.test(text)) weight += 1.5;
+  if ((currentProfile.ageRange === '18-24' || currentProfile.ageRange === '25-34') && /(somn|telefon|stres|mişcare|mișcare)/.test(text)) weight += 1.2;
+
+  return weight;
+}
+
+function pickQuestions(currentProfile) {
+  const genderPool = allQuestions.filter(q => {
+    const targets = getQuestionTargets(q);
+    return targets.includes('all') || targets.includes(currentProfile.gender);
+  });
+
+  const targeted = shuffleArray(genderPool.filter(q => {
+    const targets = getQuestionTargets(q);
+    return !targets.includes('all') && targets.includes(currentProfile.gender);
+  })).slice(0, 2);
+
+  const targetedSet = new Set(targeted.map(q => q.question));
+  const weightedPool = shuffleArray(genderPool)
+    .filter(q => !targetedSet.has(q.question))
+    .map(q => ({ q, weight: getQuestionWeight(q, currentProfile) + Math.random() }))
+    .sort((a, b) => b.weight - a.weight)
+    .slice(0, 18)
+    .map(item => item.q);
+
+  const general = shuffleArray(weightedPool).slice(0, 10 - targeted.length);
+  return shuffleArray([...targeted, ...general]).map(q => ({
+    ...q,
+    options: shuffleArray(q.options)
+  }));
+}
+
+function startQuiz() {
+  const error = document.getElementById('profile-error');
+  profile = getProfileData();
+
+  if (!profile) {
+    error.textContent = 'Te rog completează genul, intervalul de vârstă, greutatea și înălțimea înainte să pornim quiz-ul.';
+    error.classList.add('show');
+    return;
+  }
+
+  error.classList.remove('show');
+  quizQuestions = pickQuestions(profile);
+  currentQuestion = 0;
+  score = 0;
+  document.getElementById('screen-intro').classList.remove('active');
+  document.getElementById('screen-quiz').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const q = quizQuestions[currentQuestion];
+  selectedOption = null;
+
+  const progress = (currentQuestion / quizQuestions.length) * 100;
+  document.getElementById('progress-fill').style.width = progress + '%';
+  document.getElementById('progress-label').textContent = `${currentQuestion + 1} din ${quizQuestions.length}`;
+  document.getElementById('score-label').textContent = score;
+
+  document.getElementById('category-tag').textContent = q.category;
+  document.getElementById('question-text').textContent = q.question;
+
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = opt.text;
+    btn.onclick = () => selectOption(idx);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('zzzumzi-reaction').classList.remove('show');
+  document.getElementById('next-btn-wrap').classList.remove('show');
+  document.getElementById('next-btn').textContent = 'Următoarea →';
+}
+
+function selectOption(idx) {
+  const q = quizQuestions[currentQuestion];
+  const opts = document.querySelectorAll('.option');
+  const previousSelection = selectedOption;
+
+  selectedOption = idx;
+
+  opts.forEach((opt, i) => {
+    opt.classList.toggle('selected', i === idx);
+    opt.classList.remove('option-pop');
+  });
+
+  const selectedEl = opts[idx];
+  void selectedEl.offsetWidth;
+  selectedEl.classList.add('option-pop');
+
+  if (previousSelection !== null) {
+    score -= q.options[previousSelection].points;
+  }
+  score += q.options[idx].points;
+  document.getElementById('score-label').textContent = score;
+
+  const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+  document.getElementById('progress-fill').style.width = progress + '%';
+
+  document.getElementById('reaction-text').textContent = q.options[idx].comment;
+  document.getElementById('zzzumzi-reaction').classList.remove('show');
+  setTimeout(() => {
+    document.getElementById('zzzumzi-reaction').classList.add('show');
+  }, 140);
+
+  document.getElementById('next-btn-wrap').classList.add('show');
+  if (currentQuestion === quizQuestions.length - 1) {
+    document.getElementById('next-btn').textContent = 'Vezi rezultatul ✨';
+  }
+}
+
+function nextQuestion() {
+  document.getElementById('zzzumzi-reaction').classList.remove('show');
+
+  currentQuestion++;
+  if (currentQuestion >= quizQuestions.length) {
+    setTimeout(() => showResult(), 350);
+  } else {
+    setTimeout(() => {
+      loadQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 350);
+  }
+}
+
+function buildPersonalizedResult(baseDiagnosis, currentProfile) {
+  const bmiGroup = getBMIGroup(currentProfile.bmi);
+  const genderLabel = currentProfile.gender === 'male' ? 'bărbat' : 'femeie';
+  const ageText = currentProfile.ageRange.replace('-', '–');
+  let emphasis = '';
+
+  if (bmiGroup === 'low') {
+    emphasis = 'Pentru profilul tău, ar merita mai multă atenție mesele regulate, aportul suficient de proteine și un program mai bun de odihnă.';
+  } else if (bmiGroup === 'balanced') {
+    emphasis = 'Profilul tău arată echilibru bun. Accentul rămâne pe consecvență: somn, hidratare, mișcare și prevenție.';
+  } else if (bmiGroup === 'high') {
+    emphasis = 'Pentru profilul tău, ar ajuta mult pașii mici și constanți: mai multă mișcare zilnică, mai puțin zahăr și mai puține mese ultra-procesate.';
+  } else {
+    emphasis = 'Pentru profilul tău, cele mai valoroase lucruri sunt rutina, sprijinul profesionist și schimbările făcute treptat, fără presiune inutilă.';
+  }
+
+  if (currentProfile.ageRange === '45-54' || currentProfile.ageRange === '55+') {
+    emphasis += ' În plus, prevenția, analizele periodice și suplimentarea corectă devin și mai importante odată cu vârsta.';
+  }
+
+  return `${baseDiagnosis.text} ${emphasis} Profil estimat: ${genderLabel}, ${ageText} ani, IMC ${currentProfile.bmi}.`;
+}
+
+function showResult() {
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const diagnosis = diagnoses.find(d => score >= d.min && score <= d.max);
+  const personalizedText = buildPersonalizedResult(diagnosis, profile);
+
+  const scoreEl = document.getElementById('final-score');
+  let currentDisplayScore = 0;
+  const increment = Math.max(1, score / 40);
+  const timer = setInterval(() => {
+    currentDisplayScore += increment;
+    if (currentDisplayScore >= score) {
+      currentDisplayScore = score;
+      clearInterval(timer);
+    }
+    scoreEl.textContent = Math.floor(currentDisplayScore);
+  }, 30);
+
+  document.getElementById('result-emoji').textContent = diagnosis.emoji;
+  document.getElementById('diagnosis-title').textContent = diagnosis.title;
+  document.getElementById('diagnosis-text').textContent = personalizedText;
+  document.getElementById('gift-product-image').src = diagnosis.product.image;
+  document.getElementById('gift-product-image').alt = diagnosis.product.name;
+  document.getElementById('gift-product-name').textContent = diagnosis.product.name;
+  document.getElementById('gift-product-description').textContent = diagnosis.product.description;
+  document.getElementById('gift-product-code').textContent = diagnosis.product.code;
+  document.getElementById('gift-product-link').href = diagnosis.product.url;
+}
+
+function restartQuiz() {
+  document.getElementById('screen-result').classList.remove('active');
+  document.getElementById('screen-intro').classList.add('active');
+  document.getElementById('zzzumzi-reaction').classList.remove('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
