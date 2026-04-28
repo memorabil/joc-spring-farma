@@ -819,6 +819,34 @@
   .share-icon-story { width: 12px; height: 20px; }
   .share-icon-square { width: 18px; height: 18px; }
 
+  /* Branded social icons */
+  .share-icon-fb {
+    background: #1877F2;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 2px 6px -2px rgba(24, 119, 242, 0.5);
+  }
+  .share-icon-ig {
+    background: linear-gradient(135deg, #FEDA75 0%, #FA7E1E 25%, #D62976 50%, #962FBF 75%, #4F5BD5 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 2px 6px -2px rgba(214, 41, 118, 0.5);
+  }
+  .share-btn-fb:hover { border-color: rgba(24, 119, 242, 0.45); }
+  .share-btn-ig:hover { border-color: rgba(214, 41, 118, 0.45); }
+
+  .share-hint {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--purple-800);
+    font-weight: 600;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.25s ease, max-height 0.25s ease, margin-top 0.25s ease;
+    line-height: 1.45;
+  }
+  .share-hint.visible {
+    opacity: 0.9;
+    max-height: 80px;
+  }
+
   .share-btn-label {
     display: flex;
     flex-direction: column;
@@ -1371,27 +1399,28 @@
 
       <div class="share-block">
         <div class="share-title">Împărtășește rezultatul</div>
-        <div class="share-subtitle">Salvează o imagine și postează-o pe Instagram sau Facebook</div>
+        <div class="share-subtitle">Distribuie story-ul tău pe rețelele sociale</div>
         <div class="share-buttons">
-          <button class="share-btn" onclick="downloadShareImage('story', event)">
-            <span class="share-btn-icon" aria-hidden="true">
-              <span class="share-icon-frame share-icon-story"></span>
+          <button class="share-btn share-btn-fb" onclick="shareToSocial('facebook', event)">
+            <span class="share-btn-icon share-icon-fb" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.7c0-.9.3-1.5 1.6-1.5H17V4.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.7v3h2.6V21h3.2z"/></svg>
             </span>
             <span class="share-btn-label">
-              <span class="share-btn-main">Descarcă Story</span>
-              <span class="share-btn-sub">9 : 16</span>
+              <span class="share-btn-main">Distribuie pe Facebook</span>
+              <span class="share-btn-sub">Story 9 : 16</span>
             </span>
           </button>
-          <button class="share-btn" onclick="downloadShareImage('square', event)">
-            <span class="share-btn-icon" aria-hidden="true">
-              <span class="share-icon-frame share-icon-square"></span>
+          <button class="share-btn share-btn-ig" onclick="shareToSocial('instagram', event)">
+            <span class="share-btn-icon share-icon-ig" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/></svg>
             </span>
             <span class="share-btn-label">
-              <span class="share-btn-main">Descarcă Post</span>
-              <span class="share-btn-sub">1 : 1</span>
+              <span class="share-btn-main">Distribuie pe Instagram</span>
+              <span class="share-btn-sub">Story 9 : 16</span>
             </span>
           </button>
         </div>
+        <div class="share-hint" id="shareHint"></div>
       </div>
 
       <div class="footer-brand">
@@ -2549,30 +2578,92 @@ async function renderShareImage(format) {
   return canvas;
 }
 
-async function downloadShareImage(format, evt) {
+async function shareToSocial(platform, evt) {
   const clicked = evt && evt.currentTarget;
-  if (clicked) { clicked.disabled = true; clicked.querySelector('.share-btn-main').textContent = 'Se generează...'; }
+  const mainLabel = clicked && clicked.querySelector('.share-btn-main');
+  const originalText = mainLabel ? mainLabel.textContent : '';
+  const hintEl = document.getElementById('shareHint');
+
+  const setHint = (text) => {
+    if (!hintEl) return;
+    if (text) {
+      hintEl.textContent = text;
+      hintEl.classList.add('visible');
+    } else {
+      hintEl.classList.remove('visible');
+    }
+  };
+
+  if (clicked) {
+    clicked.disabled = true;
+    if (mainLabel) mainLabel.textContent = 'Se generează...';
+  }
+
   try {
-    const canvas = await renderShareImage(format);
-    const dataUrl = canvas.toDataURL('image/png', 0.95);
+    // Always render the Story (9:16) format
+    const canvas = await renderShareImage('story');
     const diagnosis = diagnoses.find(d => score >= d.min && score <= d.max);
     const safeTitle = (diagnosis.title || 'rezultat').toLowerCase().replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '');
-    const filename = 'zzzumzi-' + safeTitle + '-' + format + '.png';
+    const filename = 'zzzumzi-' + safeTitle + '-story.png';
+    const shareText = 'Am făcut quiz-ul Zzzumzi de la Spring Farma! Vezi și tu ce-ți spune corpul: ';
+    const shareUrl = 'https://zzzumzi.ro';
 
+    // Convert canvas to Blob (needed for Web Share API with files)
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png', 0.95));
+    if (!blob) throw new Error('Blob conversion failed');
+    const file = new File([blob], filename, { type: 'image/png' });
+
+    // Try native Web Share API with the image file (best on mobile — opens system share sheet
+    // where user can pick Instagram, Facebook, Stories, etc.)
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({
+          files: [file],
+          title: 'Rezultatul meu Zzzumzi',
+          text: shareText + shareUrl
+        });
+        setHint('');
+        return;
+      } catch (shareErr) {
+        // User cancelled or share failed — fall through to platform-specific fallback
+        if (shareErr && shareErr.name === 'AbortError') {
+          setHint('');
+          return;
+        }
+      }
+    }
+
+    // Fallback: download the image + open the social platform.
+    // Browsers can't upload files to Instagram/Facebook directly from the web,
+    // so the user attaches the just-downloaded image manually.
+    const dataUrl = canvas.toDataURL('image/png', 0.95);
     const a = document.createElement('a');
     a.href = dataUrl;
     a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+
+    // Small delay so the download starts before we open a new tab
+    await new Promise(r => setTimeout(r, 350));
+
+    if (platform === 'facebook') {
+      // Facebook share dialog (shares the URL; user attaches the downloaded image)
+      const fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl) + '&quote=' + encodeURIComponent(shareText);
+      window.open(fbUrl, '_blank', 'noopener,noreferrer,width=640,height=640');
+      setHint('Imaginea a fost salvată pe dispozitivul tău. Atașeaz-o în postarea Facebook care s-a deschis.');
+    } else if (platform === 'instagram') {
+      // Instagram has no web share API — open it so the user can post the saved image
+      window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer');
+      setHint('Imaginea a fost salvată pe dispozitivul tău. Deschide Instagram și încarc-o ca Story sau postare.');
+    }
   } catch (err) {
-    console.error('Share image generation failed:', err);
-    alert('Nu am putut genera imaginea. Încearcă din nou.');
+    console.error('Share failed:', err);
+    setHint('Nu am putut distribui imaginea. Încearcă din nou.');
   } finally {
     if (clicked) {
       clicked.disabled = false;
-      const main = clicked.querySelector('.share-btn-main');
-      if (main) main.textContent = format === 'story' ? 'Descarcă Story' : 'Descarcă Post';
+      if (mainLabel) mainLabel.textContent = originalText;
     }
   }
 }
