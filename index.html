@@ -294,6 +294,40 @@
   }
   .profile-error.show { display: block; }
 
+  /* GDPR consent row */
+  .consent-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(168, 85, 201, 0.16);
+    cursor: pointer;
+    user-select: none;
+  }
+  .consent-row input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    accent-color: var(--purple-500);
+    cursor: pointer;
+  }
+  .consent-text {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--purple-900);
+    font-weight: 600;
+  }
+  .consent-text a {
+    color: var(--purple-700);
+    text-decoration: underline;
+    font-weight: 800;
+  }
+  .consent-text a:hover { color: var(--purple-500); }
+
   /* BUTTONS - Gradient */
   .btn {
     display: inline-block;
@@ -1278,6 +1312,11 @@
         <div class="profile-help">Așa aleg întrebări mai potrivite pentru tine și îți ofer un rezultat mai relevant.</div>
 
         <div class="profile-grid">
+          <div class="field full">
+            <label for="email">Adresa de email</label>
+            <input id="email" type="email" autocomplete="email" placeholder="nume@exemplu.ro" />
+          </div>
+
           <div class="field">
             <label for="gender">Gen</label>
             <select id="gender">
@@ -1309,6 +1348,14 @@
             <input id="height" type="number" min="120" max="230" step="0.1" placeholder="Ex.: 172" />
           </div>
         </div>
+
+        <label class="consent-row" for="consent">
+          <input type="checkbox" id="consent" />
+          <span class="consent-text">
+            Sunt de acord cu prelucrarea datelor mele (email, profil și răspunsuri) de către Spring Farma pentru a-mi oferi rezultatul personalizat al quiz-ului.
+            <a href="#" target="_blank" rel="noopener">Politica de confidențialitate</a>
+          </span>
+        </label>
 
         <div class="profile-error" id="profile-error">Te rog completează toate câmpurile înainte să pornim quiz-ul.</div>
       </div>
@@ -2068,6 +2115,34 @@ let currentQuestion = 0;
 let score = 0;
 let selectedOption = null;
 let profile = null;
+let userAnswers = [];
+
+// ============================================
+// Google Sheets endpoint — REPLACE this URL with your own Apps Script Web App URL.
+// See README-GOOGLE-SHEETS.txt for setup instructions.
+// ============================================
+const GOOGLE_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxKuDuTLgmMsrT6e_sB-DCFwdZXKjo2VuDNYwMSPCDHN07b_Wx2PPNmKfweQrtta9VYnw/exec';
+
+async function submitToGoogleSheets(payload) {
+  // Don't try to send if endpoint isn't configured yet
+  if (!GOOGLE_SHEETS_ENDPOINT || GOOGLE_SHEETS_ENDPOINT === 'YOUR_GOOGLE_SHEETS_ENDPOINT_HERE') {
+    console.warn('Google Sheets endpoint not configured — skipping submission.');
+    return;
+  }
+  try {
+    // Use no-cors + text/plain to avoid a CORS preflight (Apps Script doesn't handle OPTIONS).
+    // The trade-off: we can't read the response, but for fire-and-forget logging that's fine.
+    await fetch(GOOGLE_SHEETS_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+  } catch (err) {
+    // Silently log — never block the user experience because of analytics
+    console.error('Failed to submit results:', err);
+  }
+}
 
 function shuffleArray(arr) {
   const a = [...arr];
@@ -2087,16 +2162,23 @@ function getQuestionTargets(question) {
 }
 
 function getProfileData() {
+  const email = (document.getElementById('email').value || '').trim();
   const gender = document.getElementById('gender').value;
   const ageRange = document.getElementById('age-range').value;
   const weight = parseFloat(document.getElementById('weight').value);
   const height = parseFloat(document.getElementById('height').value);
+  const consent = document.getElementById('consent').checked;
 
-  if (!gender || !ageRange || !weight || !height) return null;
+  // Basic email regex — accepts standard formats, rejects obvious garbage
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!email || !emailValid) return { error: 'email' };
+  if (!gender || !ageRange || !weight || !height) return { error: 'fields' };
+  if (!consent) return { error: 'consent' };
 
   const heightMeters = height / 100;
   const bmi = +(weight / (heightMeters * heightMeters)).toFixed(1);
-  return { gender, ageRange, weight, height, bmi };
+  return { email, gender, ageRange, weight, height, bmi };
 }
 
 function getBMIGroup(bmi) {
@@ -2147,14 +2229,22 @@ function pickQuestions(currentProfile) {
 
 function startQuiz() {
   const error = document.getElementById('profile-error');
-  profile = getProfileData();
+  const result = getProfileData();
 
-  if (!profile) {
-    error.textContent = 'Te rog completează genul, intervalul de vârstă, greutatea și înălțimea înainte să pornim quiz-ul.';
+  if (!result || result.error) {
+    if (result && result.error === 'email') {
+      error.textContent = 'Te rog introdu o adresă de email validă pentru a primi rezultatul.';
+    } else if (result && result.error === 'consent') {
+      error.textContent = 'Te rog bifează acordul pentru prelucrarea datelor înainte să pornim quiz-ul.';
+    } else {
+      error.textContent = 'Te rog completează toate câmpurile (email, gen, vârstă, greutate, înălțime) înainte să pornim quiz-ul.';
+    }
     error.classList.add('show');
     return;
   }
 
+  profile = result;
+  userAnswers = [];
   error.classList.remove('show');
   quizQuestions = pickQuestions(profile);
   currentQuestion = 0;
@@ -2213,6 +2303,15 @@ function selectOption(idx) {
   }
   score += q.options[idx].points;
   document.getElementById('score-label').textContent = score;
+
+  // Track the answer (overwrites if user changes selection)
+  userAnswers[currentQuestion] = {
+    questionNumber: currentQuestion + 1,
+    category: q.category,
+    question: q.question,
+    answer: q.options[idx].text,
+    points: q.options[idx].points
+  };
 
   const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
   document.getElementById('progress-fill').style.width = progress + '%';
@@ -2295,6 +2394,21 @@ function showResult() {
   document.getElementById('gift-product-description').textContent = diagnosis.product.description;
   document.getElementById('gift-product-code').textContent = diagnosis.product.code;
   document.getElementById('gift-product-link').href = diagnosis.product.url;
+
+  // Submit results to Google Sheets (fire-and-forget, won't block UI)
+  submitToGoogleSheets({
+    timestamp: new Date().toISOString(),
+    email: profile.email,
+    gender: profile.gender,
+    ageRange: profile.ageRange,
+    weight: profile.weight,
+    height: profile.height,
+    bmi: profile.bmi,
+    score: score,
+    maxScore: quizQuestions.length * 3,
+    diagnosisTitle: diagnosis.title,
+    answers: userAnswers
+  });
 }
 
 function restartQuiz() {
